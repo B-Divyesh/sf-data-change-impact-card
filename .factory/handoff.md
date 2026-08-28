@@ -57,7 +57,7 @@ the worker; the factory owns release credentials.
   100, SEO 100; LCP 0.9s, FCP 0.9s, TBT 0ms, CLS 0.
 - Initial payload assets: JS 3.35KB, CSS 15.56KB, hero WebP 29.29KB — all well
   below the 200KB / 50KB / 300KB budgets. No web fonts or runtime CDN assets.
-- Release binary: 1,007,488 bytes. Crate archive: 70,430 bytes.
+- Release binary: 1,007,488 bytes. Crate archive: approximately 71KB.
 - `npm audit --audit-level=high`: 0 vulnerabilities.
 - `git diff --check`, `cargo fmt --check`, and the documented CLI example pass.
 
