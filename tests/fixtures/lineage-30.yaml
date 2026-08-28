@@ -1,0 +1,33 @@
+schema_version: 1
+completeness: complete
+nodes:
+  - { id: source.00, kind: source }
+  - { id: source.01, kind: source }
+  - { id: source.02, kind: source }
+  - { id: source.03, kind: source }
+  - { id: source.04, kind: source }
+  - { id: chain.05, depends_on: [source.00], recompute: run chain.05, estimate_minutes: 1 }
+  - { id: chain.06, depends_on: [chain.05], recompute: run chain.06, estimate_minutes: 1 }
+  - { id: chain.07, depends_on: [chain.06], recompute: run chain.07, estimate_minutes: 1 }
+  - { id: chain.08, depends_on: [chain.07], recompute: run chain.08, estimate_minutes: 1 }
+  - { id: chain.09, depends_on: [source.01], recompute: run chain.09, estimate_minutes: 1 }
+  - { id: chain.10, depends_on: [chain.09], recompute: run chain.10, estimate_minutes: 1 }
+  - { id: chain.11, depends_on: [chain.10], recompute: run chain.11, estimate_minutes: 1 }
+  - { id: chain.12, depends_on: [chain.11], recompute: run chain.12, estimate_minutes: 1 }
+  - { id: chain.13, depends_on: [source.02], recompute: run chain.13, estimate_minutes: 1 }
+  - { id: chain.14, depends_on: [chain.13], recompute: run chain.14, estimate_minutes: 1 }
+  - { id: chain.15, depends_on: [chain.14], recompute: run chain.15, estimate_minutes: 1 }
+  - { id: chain.16, depends_on: [chain.15], recompute: run chain.16, estimate_minutes: 1 }
+  - { id: chain.17, depends_on: [source.03], recompute: run chain.17, estimate_minutes: 1 }
+  - { id: chain.18, depends_on: [chain.17], recompute: run chain.18, estimate_minutes: 1 }
+  - { id: chain.19, depends_on: [chain.18], recompute: run chain.19, estimate_minutes: 1 }
+  - { id: chain.20, depends_on: [chain.19], recompute: run chain.20, estimate_minutes: 1 }
+  - { id: chain.21, depends_on: [source.04], recompute: run chain.21, estimate_minutes: 1 }
+  - { id: chain.22, depends_on: [chain.21], recompute: run chain.22, estimate_minutes: 1 }
+  - { id: chain.23, depends_on: [chain.22], recompute: run chain.23, estimate_minutes: 1 }
+  - { id: chain.24, depends_on: [chain.23], recompute: run chain.24, estimate_minutes: 1 }
+  - { id: unrelated.25 }
+  - { id: unrelated.26, depends_on: [unrelated.25] }
+  - { id: unrelated.27, depends_on: [unrelated.26] }
+  - { id: unrelated.28, depends_on: [unrelated.27] }
+  - { id: unrelated.29, depends_on: [unrelated.28] }

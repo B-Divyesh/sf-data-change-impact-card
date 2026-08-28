@@ -1,0 +1,7 @@
+schema_version: 1
+changes:
+  - { node: source.00, from: v1, to: v2 }
+  - { node: source.01, from: v1, to: v2 }
+  - { node: source.02, from: v1, to: v2 }
+  - { node: source.03, from: v1, to: v2 }
+  - { node: source.04, from: v1, to: v2 }

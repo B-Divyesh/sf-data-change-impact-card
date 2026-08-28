@@ -52,3 +52,28 @@ fn missing_file_uses_exit_code_one() {
         .unwrap();
     assert_eq!(output.status.code(), Some(1));
 }
+
+#[test]
+fn acceptance_fixture_finds_every_expected_node_and_no_unrelated_node() {
+    let output = Command::new(env!("CARGO_BIN_EXE_dcic"))
+        .args([
+            "analyze",
+            "-m",
+            fixture("lineage-30.yaml").to_str().unwrap(),
+            "-c",
+            fixture("changes-5.yaml").to_str().unwrap(),
+            "--json",
+        ])
+        .output()
+        .unwrap();
+    assert!(output.status.success());
+    let value: serde_json::Value = serde_json::from_slice(&output.stdout).unwrap();
+    let impacted = value["impacted"].as_array().unwrap();
+    assert_eq!(impacted.len(), 20);
+    assert!(impacted.iter().all(|item| {
+        item["node"]
+            .as_str()
+            .is_some_and(|node| node.starts_with("chain."))
+    }));
+    assert_eq!(value["summary"]["known_estimate_minutes"], 20);
+}

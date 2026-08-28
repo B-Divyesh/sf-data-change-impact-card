@@ -65,4 +65,28 @@ image generator, converted to WebP, kept below 300KB, and served locally with
 explicit dimensions. No third-party icons, fonts, scripts, or stock assets are
 used. Interface icons and drafting marks are handmade CSS/inline SVG.
 
-Final generation prompt and output size are recorded here after generation.
+### Hero asset record
+
+- File: `site/public/assets/lineage-drafting-hero.webp`
+- Tool/model: `/opt/fleet/lib/gen-image.sh`, `factory-image` deployment, high
+  quality. The resulting image is original to this project and distributed
+  under the repository's MIT license.
+- Source: 1536×1024 PNG; delivery: 1200×800 WebP, 29KB. The uncompressed source
+  was removed after visual inspection; generator metadata is retained at
+  `.factory/lineage-drafting-hero.provenance.json`.
+- Final prompt: “Use case: stylized-concept. Asset type: landing page hero
+  illustration for a local-first data engineering CLI. Scene: an oblique
+  top-down view of a deep navy architectural drafting table with fine cyan
+  graph-paper rules and registration marks. Subject: one small coral
+  schema-change slip at upper left connects through precise cyan drafting lines
+  to a branching but orderly chain of four warm ivory vellum data-asset cards;
+  two cards carry amber stale stamps and numbered recomputation marks, ending in
+  one green verified stamp. Style: tactile editorial cut-paper illustration
+  with screen-printed ink texture, crisp technical-diagram geometry, subtle
+  paper grain, sophisticated and restrained. Composition: landscape 3:2, clear
+  central-to-right lineage flow, generous navy negative space around all edges,
+  no crop of the cards. Lighting: quiet studio overhead light, shallow physical
+  layering, legible silhouettes. Palette only: deep navy, cyan, warm ivory,
+  amber, coral, muted green. Constraints: no people, no logos, no readable text,
+  no letters, no numbers, no gradients, no glowing neon, no generic analytics
+  dashboard, no photorealistic laptop, no watermark.”
