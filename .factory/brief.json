@@ -1,0 +1,15 @@
+{
+  "slug": "data-change-impact-card",
+  "title": "Data Change Impact Card",
+  "territory": "devtools-data",
+  "user": "Data engineers maintaining mutable schemas and derived assets who need a compact explanation of what changed upstream, what is now stale, and what can safely be recomputed.",
+  "smallest_useful_product": "A CLI that reads a small lineage manifest plus version/change events and emits Markdown/JSON cards showing impacted nodes, stale reason, declared recomputation order, and unknown edges.",
+  "success_measure": "On a fixture DAG with 30 nodes and five changes, the CLI identifies all expected downstream stale nodes and no unrelated nodes.",
+  "artifact_class": "cli",
+  "monetization": "free",
+  "constraints": [
+    "Do not connect to production by default",
+    "Lineage claims must state their input completeness",
+    "Support redacted node names in exported cards"
+  ]
+}
