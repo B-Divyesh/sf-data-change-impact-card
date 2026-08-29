@@ -1,11 +1,14 @@
-# Handoff — Data Change Impact Card repair
+# Handoff — Data Change Impact Card
 
 ## Release status
 
-**PASS — repaired after independent verification 2.** This remains the same
-artifact class: a Rust `dcic` CLI with a static documentation/demo site. The
-researched scope, bundled demo, local-first model, and deployment class are
-unchanged.
+**PASS — independently accepted at commit
+`4467e232750d0c3381c4781f70ac0ed3ab53c8eb`.** This remains a Rust `dcic` CLI
+with a static documentation/demo site. The researched scope, bundled demo,
+local-first model, and deployment class are unchanged. Independent verification
+3 ran every registered claim, CLI/package checks, exact build, live deployment,
+privacy/header, accessibility, offline, mobile, and Lighthouse checks; see
+`.factory/verification-3.md` for exact evidence and the unambiguous PASS.
 
 ## Repairs
 
