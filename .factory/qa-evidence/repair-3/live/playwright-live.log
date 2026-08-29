@@ -1,0 +1,26 @@
+
+Running 48 tests using 2 workers
+(node:10513) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:10514) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:10513) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:10514) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+······°·°··········°·°·······    Blocking waiting for file lock on package cache
+    Finished `release` profile [optimized] target(s) in 0.03s
+   Packaging data-change-impact-card v0.1.0 (/work/repo)
+    Blocking waiting for file lock on package cache
+    Blocking waiting for file lock on package cache
+    Updating crates.io index
+    Packaged 18 files, 80.9KiB (21.1KiB compressed)
+···  Installing data-change-impact-card v0.1.0 (/work/repo)
+    Updating crates.io index
+    Finished `release` profile [optimized] target(s) in 0.10s
+  Installing /tmp/dcic-install-claim-gUyznC/bin/dcic
+   Installed package `data-change-impact-card v0.1.0 (/work/repo)` (executable `dcic`)
+warning: be sure to add `/tmp/dcic-install-claim-gUyznC/bin` to your PATH to be able to run the installed binaries
+·········°······
+  5 skipped
+  43 passed (19.3s)
