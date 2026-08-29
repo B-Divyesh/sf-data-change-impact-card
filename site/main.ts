@@ -142,7 +142,11 @@ function cameFromThisSite() {
 }
 
 function announceInitialRoute() {
-  if (window.location.hash || cameFromThisSite() || history.state?.dcicFocusOnRestore) announceRoute();
+  if (window.location.hash) {
+    requestAnimationFrame(() => requestAnimationFrame(announceRoute));
+    return;
+  }
+  if (cameFromThisSite() || history.state?.dcicFocusOnRestore) announceRoute();
 }
 
 window.addEventListener("pageshow", (event) => {
