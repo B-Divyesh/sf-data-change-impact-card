@@ -92,9 +92,21 @@ this repository.
 
 ## Deployment evidence
 
-Pending the factory static deployment command in this work order. After it
-completes, verify the live identity, CSP response header, 404 status, desktop
-and 390px paths, service worker offline reload, and every claim command.
+Deployed with `/opt/fleet/lib/deploy-static.sh data-change-impact-card dist/site`
+to <https://data-change-impact-card.sociobot.in> on 2026-08-29 UTC. The final
+static-route repair is commit `9398dc3a77a2cc8c1b0cb987197380d84be29967`.
+
+- Live `/opt/fleet/lib/verify-url.sh` returned 200 in 654ms, with the expected
+  title, language, one `h1`, `main`, no missing alt text/unlabeled button, and
+  no console or page error.
+- Live headers include the restrictive CSP, `nosniff`, Referrer-Policy, and
+  Permissions-Policy. `/does-not-exist` returns HTTP 404 and the designed
+  `Page not found` document.
+- Live desktop and 390px Playwright run passed 12 checks (2 intentional skips),
+  including keyboard, Axe, offline reload, claim flows, privacy request log,
+  demo banner, and legal pages.
+- SHA-256 identity checks matched local `dist/site/` for `index.html`, hashed
+  CSS and JS, the hero WebP, and the social-preview WebP.
 
 ## Known gaps and next steps
 
