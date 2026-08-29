@@ -77,3 +77,35 @@ fn acceptance_fixture_finds_every_expected_node_and_no_unrelated_node() {
     }));
     assert_eq!(value["summary"]["known_estimate_minutes"], 20);
 }
+
+#[test]
+fn demo_runs_bundled_sample_and_prints_the_output_path() {
+    let output = Command::new(env!("CARGO_BIN_EXE_dcic"))
+        .arg("demo")
+        .output()
+        .unwrap();
+    assert!(output.status.success());
+    let stdout = String::from_utf8(output.stdout).unwrap();
+    assert!(stdout.contains("Demo — bundled sample data"));
+    let impact_path = stdout
+        .lines()
+        .find_map(|line| line.strip_prefix("Impact card: "))
+        .expect("demo prints the impact card path");
+    let impact = std::fs::read_to_string(impact_path).expect("demo writes an impact card");
+    assert!(impact.contains("**Disposition:** READY"));
+    assert!(impact.contains("`mart.revenue`"));
+}
+
+#[test]
+fn demo_flag_runs_the_same_bundled_sample() {
+    let output = Command::new(env!("CARGO_BIN_EXE_dcic"))
+        .arg("--demo")
+        .output()
+        .unwrap();
+    assert!(output.status.success());
+    assert!(
+        String::from_utf8(output.stdout)
+            .unwrap()
+            .contains("Result: 2 stale assets, 7 known minutes, 0 unknown edges.")
+    );
+}

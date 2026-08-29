@@ -1,0 +1,20 @@
+[
+  {
+    "id": "bundled-cli-demo",
+    "claim": "Runs a bundled sample and prints the generated impact-card path",
+    "where": "landing page, /demo/, README",
+    "test": "npm run build:site && npx playwright test --grep @claim:bundled-cli-demo"
+  },
+  {
+    "id": "offline-docs",
+    "claim": "Documentation remains available offline after the first visit",
+    "where": "privacy page",
+    "test": "npm run build:site && npx playwright test --grep @claim:offline-docs"
+  },
+  {
+    "id": "no-third-party-runtime-requests",
+    "claim": "The documentation site makes no third-party runtime requests",
+    "where": "privacy page",
+    "test": "npm run build:site && npx playwright test --grep @claim:no-third-party-runtime-requests"
+  }
+]

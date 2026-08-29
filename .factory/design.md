@@ -90,3 +90,10 @@ used. Interface icons and drafting marks are handmade CSS/inline SVG.
   amber, coral, muted green. Constraints: no people, no logos, no readable text,
   no letters, no numbers, no gradients, no glowing neon, no generic analytics
   dashboard, no photorealistic laptop, no watermark.”
+
+### Social preview derivative
+
+- File: `site/public/assets/lineage-impact-card-social.webp`
+- Provenance: deterministic center crop and resize of the original hero asset
+  above using local ImageMagick (`1200×630`, WebP quality 82). It introduces no
+  new imagery and retains the same MIT licensing and visual thesis.

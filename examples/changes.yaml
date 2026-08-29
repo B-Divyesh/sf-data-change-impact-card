@@ -1,0 +1,6 @@
+schema_version: 1
+changes:
+  - node: raw.orders
+    from: v41
+    to: v42
+    summary: currency_code became required

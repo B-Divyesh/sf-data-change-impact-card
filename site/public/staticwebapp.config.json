@@ -2,7 +2,8 @@
   "globalHeaders": {
     "X-Content-Type-Options": "nosniff",
     "Referrer-Policy": "strict-origin-when-cross-origin",
-    "Permissions-Policy": "camera=(), microphone=(), geolocation=()"
+    "Permissions-Policy": "camera=(), microphone=(), geolocation=()",
+    "Content-Security-Policy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; font-src 'self'; connect-src 'self'; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'"
   },
   "routes": [
     {
@@ -16,6 +17,9 @@
   ],
   "navigationFallback": {
     "rewrite": "/index.html",
-    "exclude": ["/assets/*", "/*.svg", "/*.webp", "/privacy/*", "/terms/*"]
+    "exclude": ["/assets/*", "/*.svg", "/*.webp", "/privacy/*", "/terms/*", "/demo/*", "/404.html"]
+  },
+  "responseOverrides": {
+    "404": { "rewrite": "/404.html" }
   }
 }

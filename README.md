@@ -8,6 +8,20 @@ or runs a job.
 
 Live documentation: <https://data-change-impact-card.sociobot.in>
 
+## Try the bundled sample
+
+Run the one-command demo before using your own files:
+
+```sh
+dcic demo
+# or: dcic --demo
+```
+
+It writes bundled `lineage.yaml`, `changes.yaml`, and `impact.md` into a unique
+temporary `dcic-demo-*` directory, then prints the exact impact-card path. The
+demo never reads your project, connects to production, or runs a job. See
+`examples/` for the shipped sample and `.factory/demo.md` for its sandbox rules.
+
 ## Install
 
 Download a release binary, or build the single executable from source:
@@ -96,9 +110,11 @@ npm run build:site     # static site only -> dist/site/
 npm run pack:cli       # release archives -> dist/package/
 ```
 
-The test suite covers the documented example, validation, redaction, Markdown
-and JSON output, stdin, the 30-node/five-change acceptance fixture, browser
-accessibility, keyboard behavior, mobile layout, and offline fallback.
+The test suite covers the documented example, bundled demo, validation,
+redaction, Markdown and JSON output, stdin, the 30-node/five-change acceptance
+fixture, browser accessibility, keyboard behavior, mobile layout, offline
+fallback, static delivery headers, and page metadata. The public claim tests
+are declared in `.factory/claims.json`.
 
 ## Deploy
 
@@ -109,8 +125,10 @@ intentionally not part of this repository.
 ## Privacy and security
 
 The CLI is local-only: no network access, telemetry, production connections, or
-job execution. The static site has no analytics, cookies, accounts, or external
-runtime requests. See the site’s privacy and terms pages for the public policy.
+job execution. The static site has no analytics, cookies, accounts, or
+third-party runtime requests. Its public shell can remain available offline
+after the first visit. See the site’s privacy and terms pages for the public
+policy.
 
 ## License
 

@@ -6,6 +6,7 @@ use std::fs;
 use std::io::{self, Read, Write};
 use std::path::PathBuf;
 use std::process::ExitCode;
+use std::time::{SystemTime, UNIX_EPOCH};
 
 #[derive(Parser)]
 #[command(
@@ -15,14 +16,20 @@ use std::process::ExitCode;
     long_about = "Build a deterministic Markdown or JSON impact card from declared lineage and explicit version changes. dcic is read-only: it never connects to production or runs recomputation commands."
 )]
 struct Cli {
+    /// Run the bundled sample in a temporary directory
+    #[arg(long, global = true)]
+    demo: bool,
+
     #[command(subcommand)]
-    command: Command,
+    command: Option<Command>,
 }
 
 #[derive(Subcommand)]
 enum Command {
     /// Trace explicit changes through declared downstream lineage
     Analyze(AnalyzeArgs),
+    /// Run bundled sample data and print the generated impact card path
+    Demo,
 }
 
 #[derive(Args)]
@@ -81,7 +88,20 @@ fn main() -> ExitCode {
 }
 
 fn run(cli: Cli) -> Result<(), RunError> {
-    let Command::Analyze(args) = cli.command;
+    match (cli.demo, cli.command) {
+        (true, None) | (false, Some(Command::Demo)) | (true, Some(Command::Demo)) => run_demo(),
+        (true, Some(Command::Analyze(_))) => Err(RunError::Input(Error::Invalid(
+            "--demo cannot be combined with analyze; use either 'dcic demo' or 'dcic analyze'"
+                .to_owned(),
+        ))),
+        (false, None) => Err(RunError::Input(Error::Invalid(
+            "choose 'analyze' for your files or 'demo' for the bundled sample".to_owned(),
+        ))),
+        (false, Some(Command::Analyze(args))) => run_analyze(args),
+    }
+}
+
+fn run_analyze(args: AnalyzeArgs) -> Result<(), RunError> {
     if args.manifest.as_os_str() == "-" && args.changes.as_os_str() == "-" {
         return Err(RunError::Input(Error::Invalid(
             "manifest and changes cannot both read from stdin".to_owned(),
@@ -101,6 +121,63 @@ fn run(cli: Cli) -> Result<(), RunError> {
         Format::Json => render_json(&report).map_err(RunError::Input)?,
     };
     write_output(args.output.as_ref(), rendered.as_bytes())
+}
+
+/// Run a complete, deterministic sample without reading a user's project.
+/// The files remain in a unique temporary directory so a visitor can inspect
+/// the exact input and output before deleting that directory.
+fn run_demo() -> Result<(), RunError> {
+    const MANIFEST: &str = include_str!("../examples/lineage.yaml");
+    const CHANGES: &str = include_str!("../examples/changes.yaml");
+
+    let nonce = SystemTime::now()
+        .duration_since(UNIX_EPOCH)
+        .map_err(|error| RunError::Io(format!("could not create demo directory name: {error}")))?
+        .as_nanos();
+    let directory = std::env::temp_dir().join(format!("dcic-demo-{}-{nonce}", std::process::id()));
+    fs::create_dir(&directory).map_err(|error| {
+        RunError::Io(format!(
+            "could not create '{}': {error}",
+            directory.display()
+        ))
+    })?;
+
+    let manifest_path = directory.join("lineage.yaml");
+    let changes_path = directory.join("changes.yaml");
+    let output_path = directory.join("impact.md");
+    fs::write(&manifest_path, MANIFEST).map_err(|error| {
+        RunError::Io(format!(
+            "could not write '{}': {error}",
+            manifest_path.display()
+        ))
+    })?;
+    fs::write(&changes_path, CHANGES).map_err(|error| {
+        RunError::Io(format!(
+            "could not write '{}': {error}",
+            changes_path.display()
+        ))
+    })?;
+
+    let manifest = parse_manifest(MANIFEST).map_err(RunError::Input)?;
+    let changes = parse_changes(CHANGES).map_err(RunError::Input)?;
+    let report = analyze(&manifest, &changes).map_err(RunError::Input)?;
+    fs::write(&output_path, render_markdown(&report)).map_err(|error| {
+        RunError::Io(format!(
+            "could not write '{}': {error}",
+            output_path.display()
+        ))
+    })?;
+
+    println!("Demo — bundled sample data; no production connection or job run.");
+    println!("Sample directory: {}", directory.display());
+    println!("Impact card: {}", output_path.display());
+    println!(
+        "Result: {} stale assets, {} known minutes, {} unknown edges.",
+        report.summary.stale_assets,
+        report.summary.known_estimate_minutes,
+        report.summary.unknown_edges
+    );
+    Ok(())
 }
 
 fn read_input(path: &PathBuf) -> Result<String, RunError> {

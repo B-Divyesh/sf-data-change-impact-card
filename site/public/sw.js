@@ -1,5 +1,5 @@
-const CACHE = "dcic-shell-v1";
-const SHELL = ["/", "/index.html", "/privacy/", "/terms/", "/assets/lineage-drafting-hero.webp", "/favicon.svg"];
+const CACHE = "dcic-shell-v2";
+const SHELL = ["/", "/index.html", "/demo/", "/privacy/", "/terms/", "/assets/lineage-drafting-hero.webp", "/favicon.svg", "/apple-touch-icon.svg"];
 
 self.addEventListener("install", (event) => {
   event.waitUntil(caches.open(CACHE).then((cache) => cache.addAll(SHELL)));

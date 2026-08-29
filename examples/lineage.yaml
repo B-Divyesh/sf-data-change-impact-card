@@ -1,0 +1,15 @@
+schema_version: 1
+completeness: complete
+nodes:
+  - id: raw.orders
+    kind: source
+  - id: clean.orders
+    kind: model
+    depends_on: [raw.orders]
+    recompute: dbt run --select clean.orders
+    estimate_minutes: 2
+  - id: mart.revenue
+    kind: table
+    depends_on: [clean.orders]
+    recompute: dbt run --select mart.revenue
+    estimate_minutes: 5

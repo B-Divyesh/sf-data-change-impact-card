@@ -8,6 +8,7 @@ license = "MIT"
 repository = "https://github.com/B-Divyesh/sf-data-change-impact-card"
 keywords = ["lineage", "data-engineering", "cli", "impact-analysis"]
 categories = ["command-line-utilities", "development-tools"]
+include = ["src/**", "examples/**", "tests/**", "Cargo.toml", "Cargo.lock", "LICENSE", "README.md", ".factory/demo.md"]
 
 [[bin]]
 name = "dcic"
@@ -23,4 +24,3 @@ serde_yaml = "0.9"
 codegen-units = 1
 lto = true
 strip = true
-

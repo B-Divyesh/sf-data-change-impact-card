@@ -374,8 +374,8 @@ fn validate_versions(manifest: u32, changes: u32) -> Result<(), Error> {
     Ok(())
 }
 
-fn topological_order<'a>(
-    nodes: &BTreeMap<String, &'a Node>,
+fn topological_order(
+    nodes: &BTreeMap<String, &Node>,
     downstream: &BTreeMap<String, Vec<String>>,
 ) -> Result<Vec<String>, Error> {
     let mut indegree = BTreeMap::new();
