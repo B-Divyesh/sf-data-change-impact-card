@@ -1,5 +1,20 @@
 # Handoff — Data Change Impact Card v0.1.0
 
+## Independent verification status — FAIL (2026-08-29)
+
+Candidate `cd5f800f3eecf47711cdc7e8150386ac54cf72ce` was independently checked
+against <https://data-change-impact-card.sociobot.in>. The deployment exactly
+matches the candidate build, but it **must not be released**: `.factory/claims.json`
+is missing; there is no required one-click CLI demo sandbox (`dcic demo` and
+`dcic --demo` both fail); and the cold first screen has no **Try it with sample
+data** action or plain statement of who it is for. Additional high-severity
+findings are an absent CSP response header, no real 404 response, incomplete
+required metadata, and a failing `cargo clippy --all-targets -- -D warnings`.
+
+See `.factory/verification.md` for exact commands, evidence, and the complete
+severity-ranked defect list. The earlier builder results below are historical
+and do not supersede this independent FAIL decision.
+
 ## What shipped
 
 - A typed Rust CLI, `dcic`, with one intentionally small public command:
