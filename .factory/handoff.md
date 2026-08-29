@@ -74,7 +74,7 @@ this repository.
 - Claims: `@claim:bundled-cli-demo` passed in desktop and mobile and verified
   the generated Markdown card; `@claim:offline-docs` passed on desktop;
   `@claim:no-third-party-runtime-requests` passed in both profiles.
-- Package/consumer: `cargo package` produced a 70.2KB `.crate`; a clean
+- Package/consumer: `cargo package` produced a 70.3KB `.crate`; a clean
   extraction and `cargo install --path … --root … --locked` installed `dcic`.
   Its installed `dcic demo` emitted the expected two-stale-asset, seven-minute
   card and the package contained `examples/` and `.factory/demo.md`.
