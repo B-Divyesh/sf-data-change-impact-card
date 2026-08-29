@@ -1,4 +1,4 @@
-const CACHE = "dcic-shell-v2";
+const CACHE = "dcic-shell-v3";
 const SHELL = ["/", "/index.html", "/demo/", "/privacy/", "/terms/", "/assets/lineage-drafting-hero.webp", "/favicon.svg", "/apple-touch-icon.svg"];
 
 self.addEventListener("install", (event) => {
@@ -15,18 +15,29 @@ self.addEventListener("activate", (event) => {
 
 self.addEventListener("fetch", (event) => {
   if (event.request.method !== "GET") return;
+  const url = new URL(event.request.url);
+  const isNavigation = event.request.mode === "navigate";
+  const cachedDocument = isNavigation
+    ? caches.match(event.request, { ignoreSearch: true })
+    : caches.match(event.request);
   event.respondWith(
-    caches.match(event.request).then((cached) => {
+    cachedDocument.then((cached) => {
       if (cached) return cached;
       return fetch(event.request)
         .then((response) => {
-          if (response.ok && new URL(event.request.url).origin === self.location.origin) {
+          if (response.ok && url.origin === self.location.origin) {
             const copy = response.clone();
             caches.open(CACHE).then((cache) => cache.put(event.request, copy));
           }
           return response;
         })
-        .catch(() => (event.request.mode === "navigate" ? caches.match("/index.html") : Response.error()));
+        .catch(() => {
+          if (!isNavigation) return Response.error();
+          const shell = ["/", "/demo/", "/privacy/", "/terms/"].includes(url.pathname)
+            ? url.pathname
+            : "/";
+          return caches.match(shell);
+        });
     }),
   );
 });

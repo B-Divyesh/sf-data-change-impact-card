@@ -1,10 +1,9 @@
 # Data Change Impact Card
 
-`dcic` turns declared lineage and explicit version changes into a small,
-reviewable impact card. It tells data engineers which downstream assets are
-stale, why they are stale, the safe topological recomputation order, known cost,
-and where the supplied lineage is incomplete. It never connects to a warehouse
-or runs a job.
+`dcic` turns declared lineage and version changes into a reviewable impact card.
+For data engineers, it lists stale downstream assets, their evidence paths, and
+their declared recomputation order. It reports incomplete lineage for review and
+never runs a recomputation command.
 
 Live documentation: <https://data-change-impact-card.sociobot.in>
 
@@ -19,18 +18,18 @@ dcic demo
 
 It writes bundled `lineage.yaml`, `changes.yaml`, and `impact.md` into a unique
 temporary `dcic-demo-*` directory, then prints the exact impact-card path. The
-demo never reads your project, connects to production, or runs a job. See
-`examples/` for the shipped sample and `.factory/demo.md` for its sandbox rules.
+demo does not read your project or run a job. See `examples/` and
+`.factory/demo.md` for the bundled sample and sandbox rules.
 
 ## Install
 
-Download a release binary, or build the single executable from source:
+Build the single executable from source:
 
 ```sh
 cargo install --path .
 ```
 
-Rust 1.85 or newer is supported. Version 0.1.0 is the initial public API.
+The release package contains the binary built on its packaging host.
 
 ## Usage
 
@@ -79,24 +78,24 @@ dcic analyze -m lineage.yaml -c changes.yaml --redact -o impact.md
 ```
 
 The default format is Markdown. `--format json` and `--json` are equivalent.
-Either input may be `-` for stdin, but not both. The manifest must declare
-`completeness: complete` or `partial`; a partial declaration and every missing
-dependency are preserved as warnings in the output. Redaction replaces node
-identifiers with stable `NODE-001` aliases and omits free-text change summaries.
+Either input may be `-` for stdin, but not both. A partial manifest, a missing
+dependency, or a changed node absent from the manifest produces a review-required
+card. Redaction replaces node identifiers with stable `NODE-001` aliases and
+omits free-text change summaries.
 
-Exit codes are stable: `0` success, `1` file or serialization error, `2` invalid
-manifest/change data. Run `dcic --help` or `dcic analyze --help` for all options.
+Exit codes are `0` for success, `1` for file or serialization errors, and `2`
+for invalid manifest or change data. Run `dcic --help` or `dcic analyze --help`
+for all options.
 
 ## Input contract
 
 Both files accept YAML or JSON, selected from the filename or parsed
 automatically for stdin. Node identifiers must be unique and non-empty. A cycle
-is rejected because no honest recomputation order exists. Dependencies absent
-from `nodes` and change events naming an absent node are reported as unknown
-edges rather than silently treated as known lineage.
+is rejected. Missing dependencies and changes naming an absent node are reported
+as unknown edges.
 
-The output JSON schema is versioned with `schema_version: 1`. Arrays are
-deterministic: impacted nodes follow topological order and evidence is sorted.
+The output JSON has `schema_version: 1`. Impacted nodes follow topological
+order and evidence is sorted.
 
 ## Develop and verify
 
@@ -110,22 +109,19 @@ npm run build:site     # static site only -> dist/site/
 npm run pack:cli       # release archives -> dist/package/
 ```
 
-The test suite covers the documented example, bundled demo, validation,
-redaction, Markdown and JSON output, stdin, the 30-node/five-change acceptance
-fixture, browser accessibility, keyboard behavior, mobile layout, offline
-fallback, static delivery headers, and page metadata. The public claim tests
-are declared in `.factory/claims.json`.
+Public behavior claims and their regression commands are declared in
+`.factory/claims.json`.
 
 ## Deploy
 
-The factory deploys `dist/site/` as the static site. The `dist/package/`
-archives are ready for release attachment; registry and release credentials are
-intentionally not part of this repository.
+The factory deploys `dist/site/` as the static site. `npm run pack:cli` prepares
+the crate and host-platform binary in `dist/package/`; publishing is not done
+from this repository.
 
 ## Privacy and security
 
-The CLI is local-only: no network access, telemetry, production connections, or
-job execution. The static site has no analytics, cookies, accounts, or
+The CLI runs the supplied analysis locally and does not execute declared
+recompute commands. The static site has no analytics, cookies, accounts, or
 third-party runtime requests. Its public shell can remain available offline
 after the first visit. See the site’s privacy and terms pages for the public
 policy.

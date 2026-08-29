@@ -45,6 +45,35 @@ fn json_flag_is_scriptable() {
 }
 
 #[test]
+fn undeclared_changed_node_reports_review_required_in_json() {
+    let changes =
+        "schema_version: 1\nchanges:\n  - node: missing.source\n    from: v1\n    to: v2\n";
+    let output = Command::new(env!("CARGO_BIN_EXE_dcic"))
+        .args([
+            "analyze",
+            "-m",
+            fixture("lineage.yaml").to_str().unwrap(),
+            "-c",
+            "-",
+            "--json",
+        ])
+        .stdin(std::process::Stdio::piped())
+        .stdout(std::process::Stdio::piped())
+        .spawn()
+        .and_then(|mut child| {
+            use std::io::Write;
+            child.stdin.take().unwrap().write_all(changes.as_bytes())?;
+            child.wait_with_output()
+        })
+        .unwrap();
+    assert!(output.status.success());
+    let value: serde_json::Value = serde_json::from_slice(&output.stdout).unwrap();
+    assert_eq!(value["summary"]["stale_assets"], 0);
+    assert_eq!(value["summary"]["unknown_edges"], 1);
+    assert_eq!(value["summary"]["disposition"], "review_required");
+}
+
+#[test]
 fn missing_file_uses_exit_code_one() {
     let output = Command::new(env!("CARGO_BIN_EXE_dcic"))
         .args(["analyze", "-m", "absent.yaml", "-c", "absent-too.yaml"])

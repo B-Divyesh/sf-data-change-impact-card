@@ -1,20 +1,56 @@
 [
   {
     "id": "bundled-cli-demo",
-    "claim": "Runs a bundled sample and prints the generated impact-card path",
+    "claim": "Runs a bundled sample in a temporary folder and prints the generated impact-card path",
     "where": "landing page, /demo/, README",
     "test": "npm run build:site && npx playwright test --grep @claim:bundled-cli-demo"
   },
   {
     "id": "offline-docs",
-    "claim": "Documentation remains available offline after the first visit",
+    "claim": "Home and demo documentation remain available offline after the first visit",
     "where": "privacy page",
     "test": "npm run build:site && npx playwright test --grep @claim:offline-docs"
   },
   {
     "id": "no-third-party-runtime-requests",
-    "claim": "The documentation site makes no third-party runtime requests",
+    "claim": "The documentation site makes no third-party runtime requests or account-data storage",
     "where": "privacy page",
     "test": "npm run build:site && npx playwright test --grep @claim:no-third-party-runtime-requests"
+  },
+  {
+    "id": "core-impact-card",
+    "claim": "Lists stale assets, evidence paths, topological recomputation order, and known cost from declared lineage, or reports no impact with input completeness",
+    "where": "landing page, README",
+    "test": "npm run build:site && npx playwright test --grep @claim:core-impact-card"
+  },
+  {
+    "id": "input-output-contract",
+    "claim": "Accepts YAML or JSON input and produces JSON or redacted Markdown output",
+    "where": "landing page, README",
+    "test": "npm run build:site && npx playwright test --grep @claim:input-output-contract"
+  },
+  {
+    "id": "uncertain-lineage",
+    "claim": "Requires review for missing lineage and rejects lineage cycles",
+    "where": "landing page, README, terms",
+    "test": "npm run build:site && npx playwright test --grep @claim:uncertain-lineage"
+  },
+  {
+    "id": "local-read-only-analysis",
+    "claim": "Analyzes supplied files locally and never runs declared recompute commands",
+    "where": "landing page, README, demo, privacy, terms",
+    "test": "npm run build:site && npx playwright test --grep @claim:local-read-only-analysis"
+  },
+  {
+    "id": "mit-license",
+    "claim": "The project is MIT licensed",
+    "where": "landing page, README, terms",
+    "test": "npm run build:site && npx playwright test --grep @claim:mit-license"
+  },
+  {
+    "id": "host-platform-package",
+    "claim": "The release package includes the binary built on its packaging host",
+    "where": "landing page, README",
+    "test": "npm run build:site && npx playwright test --grep @claim:host-platform-package"
   }
 ]

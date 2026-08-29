@@ -333,15 +333,15 @@ pub fn analyze(manifest: &Manifest, changes: &ChangeSet) -> Result<ImpactReport,
         ));
     }
 
-    let disposition = if impacted.is_empty() {
-        Disposition::NoImpact
-    } else if manifest.completeness == Completeness::Partial
+    let disposition = if manifest.completeness == Completeness::Partial
         || !unknown_edges.is_empty()
         || recompute_order
             .iter()
             .any(|step| step.status != StepStatus::Ready)
     {
         Disposition::ReviewRequired
+    } else if impacted.is_empty() {
+        Disposition::NoImpact
     } else {
         Disposition::Ready
     };
@@ -704,6 +704,21 @@ changes:
                 .iter()
                 .all(|step| step.status == StepStatus::ReviewRequired)
         );
+    }
+
+    #[test]
+    fn undeclared_changed_node_requires_review_even_without_impacted_assets() {
+        let report = analyze(
+            &parse_manifest(MANIFEST).unwrap(),
+            &parse_changes(
+                "schema_version: 1\nchanges:\n  - node: missing.source\n    from: v1\n    to: v2\n",
+            )
+            .unwrap(),
+        )
+        .unwrap();
+        assert!(report.impacted.is_empty());
+        assert_eq!(report.summary.unknown_edges, 1);
+        assert_eq!(report.summary.disposition, Disposition::ReviewRequired);
     }
 
     #[test]
