@@ -1,0 +1,14 @@
+{
+  "url": "https://data-change-impact-card.sociobot.in",
+  "loadMs": 666,
+  "errors": [],
+  "a11y": {
+    "title": "Data Change Impact Card — Trace data changes",
+    "lang": "en",
+    "h1": 1,
+    "main": true,
+    "imgsMissingAlt": 0,
+    "buttonsUnlabeled": 0,
+    "textLength": 2755
+  }
+}
