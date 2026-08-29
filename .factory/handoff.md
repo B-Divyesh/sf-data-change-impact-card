@@ -1,83 +1,47 @@
-# Handoff — perfection loop round 2
+# Handoff — independent verification 6
 
 ## Outcome
 
-**PASS.** Every finding in `.factory/review-1.md` and
-`.factory/review-2.md` is resolved. The remaining F-2-1 price claim was removed
-from the landing and Terms pages. The MIT claim test now verifies the repository
-license, package metadata, public wording, and the absence of the unsupported
-“free” wording.
+**PASS.** Candidate `6c9c9ceef03bd6cd45fffa015c2273097beea733` is accepted at
+<https://data-change-impact-card.sociobot.in>. No product code was changed and
+no defect of any severity remains open. Full evidence is in
+`.factory/verification-6.md`.
 
-The earlier fixes remain intact: the first mobile demo viewport shows the real
-2-stale-asset result, demo state is isolated, all public claims have one tagged
-test, route focus and announcements work, the 404 is real, metadata and legal
-links are complete, and the 390px layout has no horizontal overflow.
+## What was verified
 
-Implementation commit: `d5beb29` (`fix: remove unsupported price claim`).
+- The cold first screen states what the CLI does, names data engineers, and
+  presents a visible one-click **Try it with sample data** action.
+- The sample opens `/demo/?demo=1`, shows the finished 2-stale-asset result in
+  the first 390px viewport, preserves its isolated demo state on Reset, and
+  leaves it on Start for real.
+- All 16 exact claim commands passed after `npm ci`.
+- `npm test`, `npm run build`, Rust formatting/clippy, and npm audit passed.
+- The packaged crate installed in a clean consumer. Normal, 30-node acceptance,
+  empty, partial, redacted, invalid, exit-code, help, and demo flows passed.
+- Fourteen built/live artifacts were byte-identical, confirming deployment of
+  the candidate.
+- Live desktop and 390px mobile checks passed keyboard, visible focus, reduced
+  motion, Axe, route semantics, link crawl, storage/request privacy, service
+  worker update, and offline reload.
+- Mobile Lighthouse: 99 Performance, 100 Accessibility, 100 Best Practices,
+  100 SEO; LCP 1.0 s, CLS 0, TBT 90 ms.
+- Live caching and security headers match the static product contract.
 
-## Clean-clone verification
-
-Verified from `/tmp/dcic-polish-2-clean.GaPz5P/repo`, cloned from implementation
-commit `d5beb29`:
-
-- All 16 exact commands in `.factory/claims.json`: passed.
-- `npm test`: 13 Rust tests, 4 static contract tests, and 43 Playwright tests
-  passed; 5 intentional project-specific skips.
-- `npm run build`: passed and produced `dist/site/`, the packaged crate, and
-  `dist/package/dcic-0.1.0-linux-x64`.
-- `cargo fmt --check`: passed.
-- `cargo clippy --all-targets --all-features -- -D warnings`: passed.
-- `npm audit --audit-level=high`: 0 vulnerabilities.
-- Built assets: JavaScript 4.71 kB / 1.97 kB gzip; CSS 20.38 kB / 4.85 kB
-  gzip.
-
-The claim commands cover the CLI demo sandbox, offline reload, same-origin
-privacy boundary, impact analysis, YAML/JSON input, Markdown/JSON output,
-redaction, uncertain lineage, read-only execution, MIT license, host package,
-source install, JSON aliases, stdin rules, exit codes, help, node validation,
-and clipboard feedback.
-
-## Deployment and live verification
-
-Deployed `dist/site/` through the static work-order path. Azure deployment ID:
-`70c88669-7787-4acf-8ee3-09dfd5ce211f`.
-
-Live URL: <https://data-change-impact-card.sociobot.in>
-
-- `verify-url.sh`: HTTP 200, no console errors, correct title and `lang`, one
-  h1, main landmark, complete image alternatives, and labeled buttons.
-- Live Playwright run: 43 passed, 5 intentional skips across desktop and
-  390×844 mobile, including Playwright Axe, offline, privacy, and focus tests.
-- Cold route audit: `/`, `/demo/?demo=1`, `/privacy/`, and `/terms/` return 200;
-  `/does-not-exist` returns the designed page with HTTP 404. Every route has its
-  expected title and zero serious/critical Axe findings.
-- Demo audit: sample result fits in the first 390×844 viewport; Reset demo keeps
-  `?demo=1`; Start for real returns home; cookies, localStorage, sessionStorage,
-  and IndexedDB remain empty.
-- Privacy audit: all 11 observed requests were same-origin.
-- Lighthouse mobile: Performance 100, Accessibility 100, Best Practices 100,
-  SEO 100; FCP 0.9 s, LCP 0.9 s, CLS 0, TBT 30 ms.
-- Live/local SHA-256 values match for home (`c3b85a7d…`), Terms
-  (`a8e2ee0b…`), and demo (`3ae325c7…`).
-- Production security headers include CSP, `frame-ancestors 'none'`,
-  `X-Content-Type-Options`, Referrer Policy, and Permissions Policy.
-
-Evidence is under `.factory/qa-evidence/polish-2/live/`: `browser-audit.json`,
-`verify.json`, `lighthouse.json`, `response-headers.txt`, and cold desktop/mobile
-screenshots. The full finding matrix is in `.factory/polish-2.md`.
-
-## Run and package
+## Reproduce
 
 ```sh
 npm ci
 npm test
 npm run build
+cargo fmt --check
+cargo clippy --all-targets --all-features -- -D warnings
+PLAYWRIGHT_BASE_URL=https://data-change-impact-card.sociobot.in npx playwright test
 ```
 
-Run the CLI sandbox with `cargo run -- demo`. Prepare publishable artifacts with
-`npm run pack:cli`; registry publishing remains the factory's responsibility.
+Run the CLI sandbox with `cargo run -- demo`. Prepare release artifacts with
+`npm run pack:cli`; publishing remains the factory's responsibility.
 
 ## Known gaps and next steps
 
-None. No finding of any severity remains open, and no runtime AI feature is
-warranted for this deterministic, local, read-only CLI.
+None. The product has no backend endpoint, sign-in, billing call, production
+persistence, or runtime AI, so those conditional checks do not apply.
