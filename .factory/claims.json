@@ -88,5 +88,11 @@
     "claim": "Rejects empty or duplicate node identifiers",
     "where": "README input contract",
     "test": "npm run build:site && npx playwright test --grep @claim:node-id-validation"
+  },
+  {
+    "id": "clipboard-commands",
+    "claim": "Copies the sample analysis and source-install commands, announces success, and gives a manual-copy recovery when clipboard access is unavailable",
+    "where": "landing page sample and install controls",
+    "test": "npm run build:site && npx playwright test --grep @claim:clipboard-commands"
   }
 ]

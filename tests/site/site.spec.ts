@@ -38,6 +38,30 @@ test("recorded sample details work with keyboard", async ({ page }) => {
   await expect(page.locator(".terminal-actions").getByRole("link", { name: "Try it with sample data" })).toHaveAttribute("href", "/demo/?demo=1");
 });
 
+test("@claim:clipboard-commands copies both commands and explains unavailable clipboard recovery", async ({ page, context }) => {
+  await page.goto("/");
+  await context.grantPermissions(["clipboard-read", "clipboard-write"], { origin: new URL(page.url()).origin });
+
+  await page.getByRole("button", { name: "Copy command" }).click();
+  await expect(page.locator("#demo-status")).toHaveText("Copied to clipboard.");
+  await expect.poll(() => page.evaluate(() => navigator.clipboard.readText())).toBe(
+    "dcic analyze \\\n  --manifest lineage.yaml \\\n  --changes changes.yaml \\\n  --output impact.md",
+  );
+
+  await page.getByRole("button", { name: "Copy install command" }).click();
+  await expect(page.locator("#install-feedback")).toHaveText("Copied to clipboard.");
+  await expect.poll(() => page.evaluate(() => navigator.clipboard.readText())).toBe("cargo install --path . --locked");
+
+  await page.evaluate(() => {
+    Object.defineProperty(navigator, "clipboard", {
+      configurable: true,
+      value: { writeText: async () => Promise.reject(new DOMException("Clipboard access denied", "NotAllowedError")) },
+    });
+  });
+  await page.getByRole("button", { name: "Copy command" }).click();
+  await expect(page.locator("#demo-status")).toHaveText("Copy unavailable — select the command and copy it manually.");
+});
+
 test("390px layout does not scroll sideways", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "mobile", "mobile project only");
   await page.goto("/");
