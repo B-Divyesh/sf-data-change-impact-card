@@ -1,31 +1,29 @@
-# Handoff — independent verification 6
+# Handoff — adversarial first-read review 3
 
 ## Outcome
 
-**PASS.** Candidate `6c9c9ceef03bd6cd45fffa015c2273097beea733` is accepted at
-<https://data-change-impact-card.sociobot.in>. No product code was changed and
-no defect of any severity remains open. Full evidence is in
-`.factory/verification-6.md`.
+**PASS.** Wrote `.factory/review-3.md` for candidate
+`914ed1f0bc9896211b0a261ec89ec4de2d5bec62`. The review found zero issues and
+no untested claim. No product code was changed.
 
-## What was verified
+## Verification
 
-- The cold first screen states what the CLI does, names data engineers, and
-  presents a visible one-click **Try it with sample data** action.
-- The sample opens `/demo/?demo=1`, shows the finished 2-stale-asset result in
-  the first 390px viewport, preserves its isolated demo state on Reset, and
-  leaves it on Start for real.
-- All 16 exact claim commands passed after `npm ci`.
-- `npm test`, `npm run build`, Rust formatting/clippy, and npm audit passed.
-- The packaged crate installed in a clean consumer. Normal, 30-node acceptance,
-  empty, partial, redacted, invalid, exit-code, help, and demo flows passed.
-- Fourteen built/live artifacts were byte-identical, confirming deployment of
-  the candidate.
-- Live desktop and 390px mobile checks passed keyboard, visible focus, reduced
-  motion, Axe, route semantics, link crawl, storage/request privacy, service
-  worker update, and offline reload.
-- Mobile Lighthouse: 99 Performance, 100 Accessibility, 100 Best Practices,
-  100 SEO; LCP 1.0 s, CLS 0, TBT 90 ms.
-- Live caching and security headers match the static product contract.
+- Cold-opened the live site in fresh 390×844 and 1440×900 Chromium contexts.
+- Entered the one-click demo and checked its first viewport, Reset, Start for
+  real, storage isolation, same-origin requests, and offline reload.
+- Ran all 16 commands from `.factory/claims.json` separately after `npm ci` in
+  `/tmp/dcic-review3-clean.F8ILzq/repo`; all passed.
+- Rechecked every finding from reviews 1 and 2 and both polish reports in live
+  UI and source; all remain fixed.
+- Crawled live links; checked route metadata, 404 behavior, focus restoration,
+  reduced-motion context, and Axe on every route.
+- `/opt/fleet/lib/verify-url.sh` passed with zero console errors.
+- `npm test` passed: 13 Rust tests, 4 contract tests, 43 browser tests, and 5
+  intentional skips.
+- `npm run build` passed and emitted the CLI, site, crate, and host package in
+  `dist/`.
+- The production-URL browser suite passed with 43 tests and 5 intentional
+  project-specific skips.
 
 ## Reproduce
 
@@ -33,15 +31,14 @@ no defect of any severity remains open. Full evidence is in
 npm ci
 npm test
 npm run build
-cargo fmt --check
-cargo clippy --all-targets --all-features -- -D warnings
 PLAYWRIGHT_BASE_URL=https://data-change-impact-card.sociobot.in npx playwright test
 ```
 
-Run the CLI sandbox with `cargo run -- demo`. Prepare release artifacts with
-`npm run pack:cli`; publishing remains the factory's responsibility.
+Run the CLI sandbox from any temporary directory with the built binary's
+`demo` command. The complete evidence and copy inventory are in
+`.factory/review-3.md`.
 
 ## Known gaps and next steps
 
-None. The product has no backend endpoint, sign-in, billing call, production
-persistence, or runtime AI, so those conditional checks do not apply.
+None. Preserve the current claim tests and repeat the same clean-context review
+after future copy, demo, storage, or routing changes.
