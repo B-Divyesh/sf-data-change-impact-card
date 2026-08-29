@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#071b2e" />
+    <meta name="description" content="Trace data changes before recomputing. A local CLI for data engineers that lists stale assets and their safe order." />
+    <link rel="canonical" href="https://data-change-impact-card.sociobot.in/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Data Change Impact Card — Trace data changes" />
+    <meta property="og:description" content="A local CLI for data engineers that lists stale assets and their safe order." />
+    <meta property="og:url" content="https://data-change-impact-card.sociobot.in/" />
+    <meta property="og:image" content="https://data-change-impact-card.sociobot.in/assets/lineage-impact-card-social.webp" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Data Change Impact Card — Trace data changes" />
+    <meta name="twitter:description" content="A local CLI for data engineers that lists stale assets and their safe order." />
+    <meta name="twitter:image" content="https://data-change-impact-card.sociobot.in/assets/lineage-impact-card-social.webp" />
+    <title>Data Change Impact Card — Trace data changes</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.svg" sizes="180x180" />
+    <link rel="preload" href="/assets/lineage-drafting-hero.webp" as="image" type="image/webp" />
+    <script type="module" crossorigin src="/assets/main-VGT8neR9.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/style-Ce9p5bvv.css">
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to main content</a>
+    <div class="offline-notice" id="offline-notice" role="status" hidden>
+      Offline copy — the docs and recorded example still work.
+    </div>
+    <header class="site-header">
+      <a class="wordmark" href="/" aria-label="Data Change Impact Card home">
+        <span aria-hidden="true" class="mark">D<span>↘</span>C</span>
+        <span>Impact card <small>v0.1.0</small></span>
+      </a>
+      <nav aria-label="Primary navigation">
+        <a href="/demo/">Demo</a>
+        <a href="#contract">Manifest</a>
+        <a href="#install">Install</a>
+        <a class="repo-link" href="/privacy/">Privacy</a>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="eyebrow"><span>Local CLI</span></p>
+          <h1 id="hero-title">Trace data changes<br /><em>before recomputing.</em></h1>
+          <p class="lede">For data engineers, it lists stale assets, evidence paths, and a safe recomputation order from your declared lineage.</p>
+          <div class="hero-actions">
+            <a class="button primary" href="/demo/?demo=1">Try it with sample data <span aria-hidden="true">↘</span></a>
+            <span class="action-hint">Opens the bundled command and sample result.</span>
+            <a class="button secondary" href="#install">Install dcic <span aria-hidden="true">↓</span></a>
+          </div>
+          <ul class="trust-line" aria-label="Product guarantees">
+            <li><strong>Local</strong> reads named files</li>
+            <li><strong>Read-only</strong> does not run jobs</li>
+            <li><strong>Free</strong> MIT licensed</li>
+          </ul>
+        </div>
+        <figure class="hero-figure">
+          <img src="/assets/lineage-drafting-hero.webp" width="1200" height="800" alt="A schema change connects to four data assets; two are stale and the last is verified." fetchpriority="high" />
+          <figcaption>One declared change, traced through known lineage.</figcaption>
+        </figure>
+      </section>
+
+      <section class="principle-band" aria-label="How the tool works">
+        <ol>
+          <li><span>01</span><strong>Declare</strong><small>Version changes</small></li>
+          <li><span>02</span><strong>Trace</strong><small>Known descendants</small></li>
+          <li><span>03</span><strong>Review</strong><small>Cost + unknowns</small></li>
+          <li><span>04</span><strong>Use the order</strong><small>Run jobs outside this CLI</small></li>
+        </ol>
+      </section>
+
+      <section class="limits-section" aria-labelledby="limits-title">
+        <div class="section-heading compact">
+          <p class="eyebrow">Privacy and limits</p>
+          <h2 id="limits-title">Know what the CLI does not do.</h2>
+          <p>It reads only the files you name. It makes no network request and runs no recompute command.</p>
+          <p>Every result depends on the lineage you supply. Partial lineage stays marked for review.</p>
+          <a href="/privacy/">Read the privacy details</a>
+        </div>
+      </section>
+
+      <section class="demo-section" id="demo" aria-labelledby="demo-title">
+        <div class="section-heading">
+          <p class="eyebrow">Sample output / bundled fixture</p>
+          <h2 id="demo-title">Review a sample impact card.</h2>
+          <p>Run the bundled sample with <code>dcic demo</code>. It writes an impact card in a temporary folder and prints the path.</p>
+        </div>
+
+        <div class="workbench">
+          <div class="terminal" aria-label="Recorded command line example">
+            <div class="terminal-bar">
+              <span class="terminal-title">dcic / local</span>
+              <div class="terminal-tabs" role="tablist" aria-label="Example views">
+                <button role="tab" aria-selected="true" aria-controls="terminal-code" id="tab-command" data-view="command">Command</button>
+                <button role="tab" aria-selected="false" aria-controls="terminal-code" id="tab-manifest" data-view="manifest" tabindex="-1">Manifest</button>
+                <button role="tab" aria-selected="false" aria-controls="terminal-code" id="tab-json" data-view="json" tabindex="-1">JSON</button>
+              </div>
+            </div>
+            <pre id="terminal-code" role="tabpanel" aria-labelledby="tab-command" tabindex="0"><code id="demo-code">$ dcic analyze \
+  --manifest lineage.yaml \
+  --changes changes.yaml \
+  --output impact.md</code></pre>
+            <div class="terminal-actions">
+              <a class="run-button" href="/demo/?demo=1"><span aria-hidden="true">▶</span> Try it with sample data</a>
+              <button class="copy-button" id="copy-demo" type="button">Copy command</button>
+              <span id="demo-status" class="demo-status" aria-live="polite">Sample: 1 change declared.</span>
+            </div>
+          </div>
+
+          <article class="impact-sheet" id="impact-sheet" aria-labelledby="impact-title" tabindex="-1">
+            <header>
+              <div>
+                <p>Impact card / 2026-08-28</p>
+                <h3 id="impact-title">orders.v42</h3>
+              </div>
+              <span class="stamp safe">Ready</span>
+            </header>
+            <dl class="impact-summary">
+              <div><dt>Changed</dt><dd>1 source</dd></div>
+              <div><dt>Stale</dt><dd>2 assets</dd></div>
+              <div><dt>Estimate</dt><dd>7 min</dd></div>
+              <div><dt>Unknown</dt><dd>0 edges</dd></div>
+            </dl>
+            <div class="change-note">
+              <span class="status-dot coral" aria-hidden="true"></span>
+              <div><small>Upstream change</small><code>raw.orders v41 → v42</code><p><code>currency_code</code> became required</p></div>
+            </div>
+            <div class="recompute-plan">
+              <p class="sheet-label">Safe recompute order</p>
+              <ol>
+                <li><span>01</span><div><strong>clean.orders</strong><small>model · 2 min</small></div><b aria-label="ready">✓</b></li>
+                <li><span>02</span><div><strong>mart.revenue</strong><small>table · 5 min</small></div><b aria-label="ready">✓</b></li>
+              </ol>
+            </div>
+            <footer><span>Lineage: complete</span><span>Generated locally</span></footer>
+          </article>
+        </div>
+      </section>
+
+      <section class="contract-section" id="contract" aria-labelledby="contract-title">
+        <div class="contract-copy">
+          <p class="eyebrow">Open contract / schema v1</p>
+          <h2 id="contract-title">Input and output contract.</h2>
+          <p>You declare what the tool may know. Every card repeats whether lineage is complete or partial. Missing dependencies stay visible.</p>
+          <ul class="check-list">
+            <li><span aria-hidden="true">✓</span> YAML or JSON in, Markdown or JSON out</li>
+            <li><span aria-hidden="true">✓</span> Dependency order; cycles are rejected</li>
+            <li><span aria-hidden="true">✓</span> Stable aliases for redacted exports</li>
+            <li><span aria-hidden="true">✓</span> Known-minute total and missing estimates</li>
+          </ul>
+        </div>
+        <div class="manifest-anatomy" aria-label="Annotated lineage manifest example">
+          <div class="anatomy-rule"><span>Required</span><span>Optional</span></div>
+          <pre tabindex="0"><code><b>schema_version: 1</b>
+<b>completeness: complete</b>
+<b>nodes:</b>
+  - <b>id: raw.orders</b>
+    kind: source
+  - <b>id: clean.orders</b>
+    <b>depends_on: [raw.orders]</b>
+    recompute: dbt run --select clean.orders
+    estimate_minutes: 2</code></pre>
+        </div>
+      </section>
+
+      <section class="failure-section" aria-labelledby="failure-title">
+        <div class="section-heading compact">
+          <p class="eyebrow">Failure modes</p>
+          <h2 id="failure-title">How the CLI reports uncertain lineage.</h2>
+        </div>
+        <div class="failure-grid">
+          <article><span class="failure-mark amber" aria-hidden="true">?</span><h3>Partial manifest</h3><p>The order is marked “review required.” Missing lineage never becomes a green check.</p></article>
+          <article><span class="failure-mark coral" aria-hidden="true">×</span><h3>Cycle detected</h3><p>The CLI exits with code 2 and names the cycle. It will not invent a safe order.</p></article>
+          <article><span class="failure-mark cyan" aria-hidden="true">∅</span><h3>No downstream impact</h3><p>The card says “no impact” and still states input completeness, instead of producing an empty file.</p></article>
+        </div>
+      </section>
+
+      <section class="install-section" id="install" aria-labelledby="install-title">
+        <div>
+          <p class="eyebrow">MIT licensed / v0.1.0</p>
+          <h2 id="install-title">Install the CLI from source.</h2>
+          <p>Build from source today. The release package includes the binary built on its packaging host.</p>
+        </div>
+        <div class="install-command">
+          <code id="install-code" tabindex="0">cargo install --path . --locked</code>
+          <button type="button" id="copy-install">Copy install command</button>
+        </div>
+        <p class="install-feedback" id="install-feedback" aria-live="polite"></p>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-mark" aria-hidden="true">D<span>↘</span>C</div>
+      <p>Local impact cards for declared data lineage.<br /><span>Version 0.1.0 · Built by Param Factory</span></p>
+      <nav aria-label="Legal and project links">
+        <a href="/demo/">Demo</a>
+        <a href="/privacy/">Privacy</a>
+        <a href="/terms/">Terms</a>
+        <a href="https://github.com/B-Divyesh/sf-data-change-impact-card">GitHub <span aria-hidden="true">↗</span></a>
+      </nav>
+    </footer>
+  </body>
+</html>

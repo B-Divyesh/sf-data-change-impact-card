@@ -1,0 +1,372 @@
+{
+  "base": "https://data-change-impact-card.sociobot.in",
+  "auditedAt": "2026-08-29T21:28:39.536Z",
+  "viewports": {
+    "desktop": {
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "routeResults": [
+        {
+          "path": "/",
+          "status": 200,
+          "title": "Data Change Impact Card — Trace data changes",
+          "lang": "en",
+          "h1": 1,
+          "main": 1,
+          "scrollWidth": 1440,
+          "clientWidth": 1440,
+          "missingAlt": 0,
+          "seriousCritical": []
+        },
+        {
+          "path": "/demo/?demo=1",
+          "status": 200,
+          "title": "Demo — Data Change Impact Card",
+          "lang": "en",
+          "h1": 1,
+          "main": 1,
+          "scrollWidth": 1440,
+          "clientWidth": 1440,
+          "missingAlt": 0,
+          "seriousCritical": []
+        },
+        {
+          "path": "/privacy/",
+          "status": 200,
+          "title": "Privacy — Data Change Impact Card",
+          "lang": "en",
+          "h1": 1,
+          "main": 1,
+          "scrollWidth": 1440,
+          "clientWidth": 1440,
+          "missingAlt": 0,
+          "seriousCritical": []
+        },
+        {
+          "path": "/terms/",
+          "status": 200,
+          "title": "Terms — Data Change Impact Card",
+          "lang": "en",
+          "h1": 1,
+          "main": 1,
+          "scrollWidth": 1440,
+          "clientWidth": 1440,
+          "missingAlt": 0,
+          "seriousCritical": []
+        },
+        {
+          "path": "/does-not-exist",
+          "status": 404,
+          "title": "Page not found — Data Change Impact Card",
+          "lang": "en",
+          "h1": 1,
+          "main": 1,
+          "scrollWidth": 1440,
+          "clientWidth": 1440,
+          "missingAlt": 0,
+          "seriousCritical": []
+        }
+      ],
+      "errors": [
+        "console:Failed to load resource: the server responded with a status of 404 ()"
+      ],
+      "requestCount": 20,
+      "requestOrigins": [
+        "https://data-change-impact-card.sociobot.in"
+      ],
+      "storage": {
+        "cookie": "",
+        "localStorage": 0,
+        "sessionStorage": 0,
+        "indexedDB": [],
+        "caches": [
+          "dcic-shell-v3"
+        ]
+      },
+      "mobileChecks": null
+    },
+    "mobile390": {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "routeResults": [
+        {
+          "path": "/",
+          "status": 200,
+          "title": "Data Change Impact Card — Trace data changes",
+          "lang": "en",
+          "h1": 1,
+          "main": 1,
+          "scrollWidth": 390,
+          "clientWidth": 390,
+          "missingAlt": 0,
+          "seriousCritical": []
+        },
+        {
+          "path": "/demo/?demo=1",
+          "status": 200,
+          "title": "Demo — Data Change Impact Card",
+          "lang": "en",
+          "h1": 1,
+          "main": 1,
+          "scrollWidth": 390,
+          "clientWidth": 390,
+          "missingAlt": 0,
+          "seriousCritical": []
+        },
+        {
+          "path": "/privacy/",
+          "status": 200,
+          "title": "Privacy — Data Change Impact Card",
+          "lang": "en",
+          "h1": 1,
+          "main": 1,
+          "scrollWidth": 390,
+          "clientWidth": 390,
+          "missingAlt": 0,
+          "seriousCritical": []
+        },
+        {
+          "path": "/terms/",
+          "status": 200,
+          "title": "Terms — Data Change Impact Card",
+          "lang": "en",
+          "h1": 1,
+          "main": 1,
+          "scrollWidth": 390,
+          "clientWidth": 390,
+          "missingAlt": 0,
+          "seriousCritical": []
+        },
+        {
+          "path": "/does-not-exist",
+          "status": 404,
+          "title": "Page not found — Data Change Impact Card",
+          "lang": "en",
+          "h1": 1,
+          "main": 1,
+          "scrollWidth": 390,
+          "clientWidth": 390,
+          "missingAlt": 0,
+          "seriousCritical": []
+        }
+      ],
+      "errors": [
+        "console:Failed to load resource: the server responded with a status of 404 ()"
+      ],
+      "requestCount": 23,
+      "requestOrigins": [
+        "https://data-change-impact-card.sociobot.in"
+      ],
+      "storage": {
+        "cookie": "",
+        "localStorage": 0,
+        "sessionStorage": 0,
+        "indexedDB": [],
+        "caches": [
+          "dcic-shell-v3"
+        ]
+      },
+      "mobileChecks": {
+        "targets": [
+          {
+            "text": "Privacy",
+            "width": 84.8125,
+            "height": 44
+          },
+          {
+            "text": "Reset demo",
+            "width": 171,
+            "height": 44
+          },
+          {
+            "text": "Start for real",
+            "width": 171,
+            "height": 44
+          },
+          {
+            "text": "Demo",
+            "width": 45.609375,
+            "height": 44
+          },
+          {
+            "text": "Privacy",
+            "width": 70.8125,
+            "height": 44
+          },
+          {
+            "text": "Terms",
+            "width": 54.015625,
+            "height": 44
+          },
+          {
+            "text": "GitHub ↗",
+            "width": 74.421875,
+            "height": 44
+          }
+        ],
+        "minWidth": 45.609375,
+        "minHeight": 44,
+        "positions": [
+          {
+            "text": "raw.orders v41 → v42",
+            "bottom": null
+          },
+          {
+            "text": "2 assets",
+            "bottom": 616
+          },
+          {
+            "text": "7 min",
+            "bottom": 616
+          },
+          {
+            "text": "0 edges",
+            "bottom": 616
+          }
+        ],
+        "viewportHeight": 844
+      }
+    }
+  },
+  "interaction": {
+    "firstRead": {
+      "h1": "Trace data changesbefore recomputing.",
+      "supporting": "Local CLI",
+      "primary": "Try it with sample data ↘",
+      "consequence": "Try it with sample data ↘ Opens the bundled command and sample result. Install dcic ↓"
+    },
+    "oneClick": {
+      "url": "https://data-change-impact-card.sociobot.in/demo/?demo=1",
+      "title": "Demo — Data Change Impact Card",
+      "banner": true,
+      "sampleCard": true
+    },
+    "firstFocus": {
+      "text": "Skip to main content",
+      "tag": "A",
+      "outline": "rgb(95, 225, 230) solid 3px",
+      "outlineColor": "rgb(95, 225, 230)"
+    },
+    "skipFocus": {
+      "id": "hero-title",
+      "tag": "H1"
+    },
+    "tabsToDemo": 7,
+    "demoFocusText": "Try it with sample data ↘",
+    "keyboardDemoUrl": "https://data-change-impact-card.sociobot.in/demo/?demo=1",
+    "selectedTab": "Manifest"
+  },
+  "reducedMotion": {
+    "matches": true,
+    "scrollBehavior": "auto",
+    "activeAnimations": 0,
+    "maxAnimationMs": 0.001,
+    "maxTransitionMs": 0.001
+  },
+  "pwa": {
+    "sw": {
+      "active": "activated",
+      "scriptURL": "https://data-change-impact-card.sociobot.in/sw.js",
+      "caches": [
+        "dcic-shell-v3"
+      ]
+    },
+    "offlineResponseStatus": 200,
+    "offlineTitle": "Demo — Data Change Impact Card",
+    "offlineBanner": true
+  },
+  "links": {
+    "count": 7,
+    "checked": [
+      {
+        "url": "https://data-change-impact-card.sociobot.in/",
+        "status": 200
+      },
+      {
+        "url": "https://data-change-impact-card.sociobot.in/demo/",
+        "status": 200
+      },
+      {
+        "url": "https://data-change-impact-card.sociobot.in/privacy/",
+        "status": 200
+      },
+      {
+        "url": "https://data-change-impact-card.sociobot.in/demo/?demo=1",
+        "status": 200
+      },
+      {
+        "url": "https://data-change-impact-card.sociobot.in/terms/",
+        "status": 200
+      },
+      {
+        "url": "https://github.com/B-Divyesh/sf-data-change-impact-card",
+        "status": 200
+      },
+      {
+        "url": "https://data-change-impact-card.sociobot.in/404.html",
+        "status": 200
+      }
+    ]
+  },
+  "headers": {
+    "/": {
+      "status": 200,
+      "cacheControl": "public, must-revalidate, max-age=30",
+      "contentType": "text/html",
+      "csp": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; font-src 'self'; connect-src 'self'; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'",
+      "hsts": "max-age=10886400; includeSubDomains; preload",
+      "nosniff": "nosniff",
+      "referrerPolicy": "strict-origin-when-cross-origin",
+      "permissionsPolicy": "camera=(), microphone=(), geolocation=()",
+      "contentLength": 11770
+    },
+    "/assets/main-VGT8neR9.js": {
+      "status": 200,
+      "cacheControl": "public, max-age=31536000, immutable",
+      "contentType": "text/javascript",
+      "csp": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; font-src 'self'; connect-src 'self'; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'",
+      "hsts": "max-age=10886400; includeSubDomains; preload",
+      "nosniff": "nosniff",
+      "referrerPolicy": "strict-origin-when-cross-origin",
+      "permissionsPolicy": "camera=(), microphone=(), geolocation=()",
+      "contentLength": 4714
+    },
+    "/assets/style-Ce9p5bvv.css": {
+      "status": 200,
+      "cacheControl": "public, max-age=31536000, immutable",
+      "contentType": "text/css",
+      "csp": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; font-src 'self'; connect-src 'self'; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'",
+      "hsts": "max-age=10886400; includeSubDomains; preload",
+      "nosniff": "nosniff",
+      "referrerPolicy": "strict-origin-when-cross-origin",
+      "permissionsPolicy": "camera=(), microphone=(), geolocation=()",
+      "contentLength": 20383
+    },
+    "/sw.js": {
+      "status": 200,
+      "cacheControl": "no-cache",
+      "contentType": "text/javascript",
+      "csp": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; font-src 'self'; connect-src 'self'; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'",
+      "hsts": "max-age=10886400; includeSubDomains; preload",
+      "nosniff": "nosniff",
+      "referrerPolicy": "strict-origin-when-cross-origin",
+      "permissionsPolicy": "camera=(), microphone=(), geolocation=()",
+      "contentLength": 1542
+    },
+    "/does-not-exist": {
+      "status": 404,
+      "cacheControl": "public, must-revalidate, max-age=30",
+      "contentType": "text/html",
+      "csp": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; font-src 'self'; connect-src 'self'; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'",
+      "hsts": "max-age=10886400; includeSubDomains; preload",
+      "nosniff": "nosniff",
+      "referrerPolicy": "strict-origin-when-cross-origin",
+      "permissionsPolicy": "camera=(), microphone=(), geolocation=()",
+      "contentLength": 2814
+    }
+  }
+}

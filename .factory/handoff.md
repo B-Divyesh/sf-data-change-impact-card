@@ -1,76 +1,67 @@
-# Handoff — polish round 1
+# Handoff — independent verification 4
 
 ## Outcome
 
-All 21 findings in `.factory/review-1.md` are closed. The product remains a
-Rust `clap` single-binary CLI with a Vite-built static documentation and demo
-site. The navy drafting-sheet and vellum-card visual system is preserved.
+**FAIL — do not release candidate
+`8c1adec6731ceed6e527d8278d912ed0af4adf2d`.**
 
-The one-click URL is
-<https://data-change-impact-card.sociobot.in/demo/?demo=1>. Its first 390×844
-viewport now shows the sample command, `raw.orders` change, two stale assets,
-seven known minutes, zero unknown edges, and the generated impact card. The
-sticky demo banner provides Reset demo and Start for real. Browser demo state
-exists only in `?demo=1`; it does not use browser key/value storage.
+The CLI and deployed site pass functional, build, accessibility, privacy,
+offline, performance, package, and deployment-parity checks. One acceptance
+contract defect remains: the public **Copy command** and **Copy install
+command** behaviors are not registered in `.factory/claims.json` and have no
+tagged claim test. The attached claims contract makes any unlisted public claim
+release-blocking, even though both controls worked during manual live QA.
 
-## Changes
+Full evidence and remediation are in `.factory/verification-4.md`.
 
-- Rewrote every flagged heading, label, image alternative, host-package line,
-  process step, install control, README exit-code sentence, and 404 message.
-- Added the landing-page Privacy and limits section.
-- Added heading focus and polite announcements for cross-document navigation,
-  Back/forward restoration, and fragment routes without stealing focus on a
-  cold home load.
-- Completed 404 canonical, Open Graph, Twitter, social-image, and noindex data;
-  completed route metadata on demo, privacy, and terms.
-- Expanded `.factory/claims.json` from 9 to 15 claims. Each ID occurs in exactly
-  one tagged test. Tests now cover every detail called out by the review.
-- Updated `.factory/copy-audit.md`, `.factory/demo.md`, and the 100-character,
-  verb-first `.factory/catalog-description.txt`.
-- Added `.factory/polish-1.md` with finding-by-finding closure evidence.
+## Tested target
 
-## Verification
+- Candidate: `8c1adec6731ceed6e527d8278d912ed0af4adf2d`
+- URL: <https://data-change-impact-card.sociobot.in>
+- Date: 2026-08-29 UTC
+- Product code changed by verifier: no
 
-Final clean clone: `/tmp/dcic-polish-final.2x2zN3/repo`.
+## Verification summary
 
-- Each of the 15 `test` commands in `.factory/claims.json`: PASS when executed
-  separately after `npm ci`.
-- `npm test`: PASS — 13 Rust tests, 4 static contracts, 41 Playwright passes,
-  5 intentional cross-project skips.
-- `npm run build`: PASS — `dist/site/`, 79.6 KiB crate (20.8 KiB compressed),
-  and the host-platform binary.
+- All 15 registered claim commands: PASS after `npm ci`.
+- First-read and one-click sample demo: PASS at desktop and 390×844.
 - `cargo fmt --check`: PASS.
 - `cargo clippy --all-targets -- -D warnings`: PASS.
-- `npm audit --audit-level=high`: PASS, 0 vulnerabilities.
-- Site payload: initial JS 4.71 KiB raw / 1.97 KiB gzip; CSS 20.38 KiB raw /
-  4.85 KiB gzip; hero 29.3 KiB.
-- Live Playwright: PASS — 41 passed, 5 intentional skips across desktop and
-  390×844 mobile, including Axe, keyboard/focus, privacy, offline, routes, 404,
-  and demo-first-viewport checks.
-- `/opt/fleet/lib/verify-url.sh`: PASS — HTTP 200 in 666 ms, no console errors,
-  correct title/lang/h1/main/alt/button labels.
-- Live Lighthouse: Performance 100, Accessibility 100, Best Practices 100,
-  SEO 100; FCP 1.1 s, LCP 1.1 s, TBT 0 ms, CLS 0.
-- Live routes: `/`, `/demo/?demo=1`, `/privacy/`, `/terms/` returned 200;
-  `/does-not-exist` returned the designed HTTP 404.
-- Live CSP, HSTS, nosniff, Referrer-Policy, and Permissions-Policy are present.
-  Local/live SHA-256 hashes matched for home and demo documents.
+- `npm test`: PASS — 13 Rust, 4 contract, 41 Playwright passes, 5 intentional
+  skips.
+- `npm run build`: PASS; `dist/site/` and CLI release artifacts produced.
+- Clean packaged-crate install and public CLI exercise: PASS.
+- Required 30-node/five-change acceptance fixture: PASS — exactly 20 expected
+  stale nodes and no unrelated nodes.
+- Live Playwright: PASS — 41 passed, 5 intentional skips.
+- Axe serious/critical: 0 across five routes at desktop and mobile.
+- Privacy/network/header/cache/offline/update/keyboard/reduced-motion checks:
+  PASS.
+- Candidate/live SHA-256: 14 of 14 public files match.
+- Live mobile Lighthouse: 100/100/100/100; LCP 0.9 s, TBT 30 ms, CLS 0.
+- Unlisted clipboard action claim: **FAIL / release-blocking high**.
 
-Evidence is under `.factory/qa-evidence/polish-1/`. The live verifier output is
-`live/verify.json`; Lighthouse is `live/lighthouse.json`; cold screenshots cover
-home, demo at both sizes, and the 404.
+## How to reproduce
 
-## Deployment
+```sh
+npm ci
+cargo fmt --check
+cargo clippy --all-targets -- -D warnings
+npm test
+npm run build
+PLAYWRIGHT_BASE_URL=https://data-change-impact-card.sociobot.in npx playwright test
+```
 
-- Source repair commits pushed to `origin/main`: `801ee6d`, `3f066e0`.
-- Work-order command: `npm ci && npm run build:site`.
-- Static artifact: `dist/site`.
-- Azure Static Web Apps deployment ID:
-  `fc7a1cdc-55fb-4f02-8b69-ce8ffe1cdd1f`.
-- Live URL: <https://data-change-impact-card.sociobot.in>.
+Run each command in `.factory/claims.json` separately as well. Evidence from
+this pass is under `.factory/qa-evidence/verification-4/live/`.
 
-## Known gaps and next steps
+## Required next step
 
-None for the reviewed scope. Registry publication remains factory-owned; the
-repository produces the ready-to-publish crate and host binary but does not
-publish either one.
+Add a clipboard-copy claim to `.factory/claims.json` with exactly one
+`@claim:<id>` sandbox test. The test should activate both copy controls, assert
+the exact clipboard text, and assert announced success and unavailable-copy
+recovery. Then rerun all claim commands and the full gates. Removing the two
+public copy controls also resolves the registry mismatch, but reduces utility.
+
+Registry publication remains factory-owned. This static product has no backend
+endpoint, sign-in, payment, or rate-limit surface to verify.
