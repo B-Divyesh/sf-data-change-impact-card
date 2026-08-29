@@ -10,6 +10,7 @@ test("static deployment sends a restrictive CSP and a real 404 override", () => 
   assert.match(csp, /frame-ancestors 'none'/);
   assert.doesNotMatch(csp, /unsafe-inline|https?:/);
   assert.deepEqual(config.responseOverrides["404"], { rewrite: "/404.html" });
+  assert.equal(config.navigationFallback, undefined, "static routes must preserve real 404 responses");
   assert.ok(statSync("site/404.html").isFile());
 });
 
