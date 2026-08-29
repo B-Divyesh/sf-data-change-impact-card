@@ -84,6 +84,23 @@ binary are in `dist/package/`; do not publish from this repository.
 - Lighthouse mobile preview: Performance 100, Accessibility 100, Best
   Practices 100, SEO 100; LCP 931ms and CLS 0.
 
+## Deployment evidence
+
+Deployed `dist/site/` with `/opt/fleet/lib/deploy-static.sh` on 2026-08-29 UTC.
+Azure deployment `b2c47ec8-c189-482f-a885-208ed57fb0b4` succeeded and the
+custom domain is live at <https://data-change-impact-card.sociobot.in>.
+
+- Live `/opt/fleet/lib/verify-url.sh` returned 200 in 791ms with no console or
+  page errors and the expected title, language, one `h1`, `main`, image alt
+  text, and button labels.
+- Live Playwright: 27 passed, 3 intentional project skips across desktop and
+  390px mobile; this includes the offline demo-route and target regressions.
+- Live `/does-not-exist` returns HTTP 404. `sw.js` returns no-cache, the
+  restrictive CSP and security headers are present, and its SHA-256 matches the
+  local build: `d682368cd634ff02c425de2dc7bed794d4003463ab6e41dc5e1e07c8ad23a3b6`.
+- The release binary directly reproduced the safety repair: an undeclared
+  changed node emitted `unknown_edges: 1` and `disposition: review_required`.
+
 ## Known limits
 
 The CLI intentionally analyzes only declared lineage. It does not infer
