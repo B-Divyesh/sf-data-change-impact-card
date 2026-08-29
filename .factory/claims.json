@@ -43,7 +43,7 @@
   },
   {
     "id": "mit-license",
-    "claim": "The project is MIT licensed",
+    "claim": "The project files and public site identify the CLI as MIT licensed",
     "where": "landing page, README, terms",
     "test": "npm run build:site && npx playwright test --grep @claim:mit-license"
   },

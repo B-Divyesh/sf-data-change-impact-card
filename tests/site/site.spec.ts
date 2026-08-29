@@ -236,9 +236,14 @@ test("@claim:uncertain-lineage requires review for missing lineage and rejects c
   }
 });
 
-test("@claim:mit-license ships the MIT license", () => {
+test("@claim:mit-license ships the MIT license and labels public pages accurately", () => {
   expect(readFileSync("LICENSE", "utf8")).toMatch(/MIT License/);
   expect(readFileSync("Cargo.toml", "utf8")).toMatch(/^license = "MIT"$/m);
+  const landing = readFileSync("site/index.html", "utf8");
+  const terms = readFileSync("site/terms/index.html", "utf8");
+  expect(landing).toContain("<strong>License</strong> MIT licensed");
+  expect(terms).toContain("provided under the MIT License");
+  expect(`${landing}\n${terms}`).not.toMatch(/\bfree\b/i);
 });
 
 test("@claim:host-platform-package includes the current host binary", ({}, testInfo) => {

@@ -15,7 +15,7 @@ exceeds 22 words, and no banned marketing word appears.
 | Hero action | Try it with sample data | 5 | Pass |
 | Hero hint | Opens the bundled command and sample result. | 7 | Pass |
 | Hero action | Install dcic | 2 | Pass |
-| Hero facts | Local reads named files; Read-only does not run jobs; Free MIT licensed | 12 | Pass |
+| Hero facts | Local reads named files; Read-only does not run jobs; License MIT licensed | 12 | Pass |
 | Hero image alt | A schema change connects to four data assets; two are stale and the last is verified. | 16 | Pass |
 | Hero caption | One declared change, traced through known lineage. | 7 | Pass |
 | Process | Declare Version changes; Trace Known descendants; Review Cost + unknowns; Use the order Run jobs outside this CLI | 18 | Pass |
