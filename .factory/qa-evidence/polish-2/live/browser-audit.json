@@ -1,0 +1,61 @@
+{
+  "checkedAt": "2026-08-29T22:52:08.515Z",
+  "base": "https://data-change-impact-card.sociobot.in",
+  "routes": {
+    "/": {
+      "status": 200,
+      "title": "Data Change Impact Card — Trace data changes",
+      "seriousCriticalAxeViolations": 0,
+      "consoleErrors": 0
+    },
+    "/demo/?demo=1": {
+      "status": 200,
+      "title": "Demo — Data Change Impact Card",
+      "seriousCriticalAxeViolations": 0,
+      "consoleErrors": 0
+    },
+    "/privacy/": {
+      "status": 200,
+      "title": "Privacy — Data Change Impact Card",
+      "seriousCriticalAxeViolations": 0,
+      "consoleErrors": 0
+    },
+    "/terms/": {
+      "status": 200,
+      "title": "Terms — Data Change Impact Card",
+      "seriousCriticalAxeViolations": 0,
+      "consoleErrors": 0
+    },
+    "/does-not-exist": {
+      "status": 404,
+      "title": "Page not found — Data Change Impact Card",
+      "seriousCriticalAxeViolations": 0,
+      "consoleErrors": 0
+    }
+  },
+  "demo": {
+    "firstViewportComplete": true,
+    "resetPreservesSandbox": true,
+    "startForRealReturnsHome": true,
+    "storage": {
+      "cookies": "",
+      "localStorage": 0,
+      "sessionStorage": 0,
+      "indexedDB": 0
+    }
+  },
+  "navigation": {
+    "forwardFocus": "Privacy",
+    "backFocus": "Trace data changes before recomputing.",
+    "fragmentFocus": "Input and output contract."
+  },
+  "privacy": {
+    "requests": 11,
+    "allSameOrigin": true
+  },
+  "mobile": {
+    "width": 390,
+    "horizontalOverflow": false,
+    "primaryActionAboveFold": true
+  }
+}
