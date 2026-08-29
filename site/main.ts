@@ -104,6 +104,66 @@ window.addEventListener("online", updateConnection);
 window.addEventListener("offline", updateConnection);
 updateConnection();
 
+const routeStatus = document.createElement("div");
+routeStatus.className = "route-status";
+routeStatus.setAttribute("role", "status");
+routeStatus.setAttribute("aria-live", "polite");
+routeStatus.setAttribute("aria-atomic", "true");
+document.body.append(routeStatus);
+
+function routeHeading(): HTMLElement | null {
+  const hash = window.location.hash;
+  if (hash) {
+    const target = document.querySelector<HTMLElement>(hash);
+    const heading = target?.matches("h1, h2, h3") ? target : target?.querySelector<HTMLElement>("h1, h2, h3");
+    if (heading) return heading;
+  }
+  return document.querySelector<HTMLElement>("main h1");
+}
+
+function announceRoute() {
+  const heading = routeHeading();
+  if (!heading) return;
+  heading.tabIndex = -1;
+  heading.focus({ preventScroll: Boolean(window.location.hash) });
+  routeStatus.textContent = heading.textContent?.trim() ?? document.title;
+}
+
+window.addEventListener("hashchange", announceRoute);
+window.addEventListener("popstate", announceRoute);
+
+function cameFromThisSite() {
+  if (!document.referrer) return false;
+  try {
+    return new URL(document.referrer).origin === window.location.origin;
+  } catch {
+    return false;
+  }
+}
+
+function announceInitialRoute() {
+  if (window.location.hash || cameFromThisSite() || history.state?.dcicFocusOnRestore) announceRoute();
+}
+
+window.addEventListener("pageshow", (event) => {
+  if (event.persisted || history.state?.dcicFocusOnRestore) announceRoute();
+});
+
+document.addEventListener("click", (event) => {
+  const link = (event.target as Element | null)?.closest<HTMLAnchorElement>("a[href]");
+  if (!link || link.target || link.hasAttribute("download")) return;
+  const destination = new URL(link.href, window.location.href);
+  if (destination.origin === window.location.origin && destination.pathname !== window.location.pathname) {
+    history.replaceState({ ...(history.state ?? {}), dcicFocusOnRestore: true }, "");
+  }
+});
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", announceInitialRoute, { once: true });
+} else {
+  announceInitialRoute();
+}
+
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
     void navigator.serviceWorker.register("/sw.js").catch(() => {

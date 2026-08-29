@@ -26,7 +26,7 @@ demo does not read your project or run a job. See `examples/` and
 Build the single executable from source:
 
 ```sh
-cargo install --path .
+cargo install --path . --locked
 ```
 
 The release package contains the binary built on its packaging host.
@@ -83,9 +83,9 @@ dependency, or a changed node absent from the manifest produces a review-require
 card. Redaction replaces node identifiers with stable `NODE-001` aliases and
 omits free-text change summaries.
 
-Exit codes are `0` for success, `1` for file or serialization errors, and `2`
-for invalid manifest or change data. Run `dcic --help` or `dcic analyze --help`
-for all options.
+Exit code `0` means success. Exit code `1` means a file or output-format error.
+Exit code `2` means invalid manifest or change data. Run `dcic --help` or
+`dcic analyze --help` for all options.
 
 ## Input contract
 

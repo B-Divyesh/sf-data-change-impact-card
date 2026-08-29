@@ -30,7 +30,7 @@
     <header class="site-header">
       <a class="wordmark" href="/" aria-label="Data Change Impact Card home">
         <span aria-hidden="true" class="mark">D<span>↘</span>C</span>
-        <span>Impact card <small>spec / 01</small></span>
+        <span>Impact card <small>v0.1.0</small></span>
       </a>
       <nav aria-label="Primary navigation">
         <a href="/demo/">Demo</a>
@@ -43,7 +43,7 @@
     <main id="main">
       <section class="hero" aria-labelledby="hero-title">
         <div class="hero-copy">
-          <p class="eyebrow"><span>Local-first CLI</span> / change plan 01</p>
+          <p class="eyebrow"><span>Local CLI</span></p>
           <h1 id="hero-title">Trace data changes<br /><em>before recomputing.</em></h1>
           <p class="lede">For data engineers, it lists stale assets, evidence paths, and a safe recomputation order from your declared lineage.</p>
           <div class="hero-actions">
@@ -58,9 +58,8 @@
           </ul>
         </div>
         <figure class="hero-figure">
-          <div class="measure measure-top" aria-hidden="true">000 — 1200 px</div>
-          <img src="/assets/lineage-drafting-hero.webp" width="1200" height="800" alt="A coral schema change slip connects across a blueprint to four layered data asset cards, two stamped stale and the last stamped verified." fetchpriority="high" />
-          <figcaption><span>Fig. 01</span> One declared change, traced through known lineage.</figcaption>
+          <img src="/assets/lineage-drafting-hero.webp" width="1200" height="800" alt="A schema change connects to four data assets; two are stale and the last is verified." fetchpriority="high" />
+          <figcaption>One declared change, traced through known lineage.</figcaption>
         </figure>
       </section>
 
@@ -69,8 +68,18 @@
           <li><span>01</span><strong>Declare</strong><small>Version changes</small></li>
           <li><span>02</span><strong>Trace</strong><small>Known descendants</small></li>
           <li><span>03</span><strong>Review</strong><small>Cost + unknowns</small></li>
-          <li><span>04</span><strong>Recompute</strong><small>In safe order</small></li>
+          <li><span>04</span><strong>Use the order</strong><small>Run jobs outside this CLI</small></li>
         </ol>
+      </section>
+
+      <section class="limits-section" aria-labelledby="limits-title">
+        <div class="section-heading compact">
+          <p class="eyebrow">Privacy and limits</p>
+          <h2 id="limits-title">Know what the CLI does not do.</h2>
+          <p>It reads only the files you name. It makes no network request and runs no recompute command.</p>
+          <p>Every result depends on the lineage you supply. Partial lineage stays marked for review.</p>
+          <a href="/privacy/">Read the privacy details</a>
+        </div>
       </section>
 
       <section class="demo-section" id="demo" aria-labelledby="demo-title">
@@ -95,7 +104,7 @@
   --changes changes.yaml \
   --output impact.md</code></pre>
             <div class="terminal-actions">
-              <a class="run-button" href="/demo/?demo=1"><span aria-hidden="true">▶</span> Try sample data</a>
+              <a class="run-button" href="/demo/?demo=1"><span aria-hidden="true">▶</span> Try it with sample data</a>
               <button class="copy-button" id="copy-demo" type="button">Copy command</button>
               <span id="demo-status" class="demo-status" aria-live="polite">Sample: 1 change declared.</span>
             </div>
@@ -134,11 +143,11 @@
       <section class="contract-section" id="contract" aria-labelledby="contract-title">
         <div class="contract-copy">
           <p class="eyebrow">Open contract / schema v1</p>
-          <h2 id="contract-title">Small inputs. Explicit claims.</h2>
+          <h2 id="contract-title">Input and output contract.</h2>
           <p>You declare what the tool may know. Every card repeats whether lineage is complete or partial. Missing dependencies stay visible.</p>
           <ul class="check-list">
             <li><span aria-hidden="true">✓</span> YAML or JSON in, Markdown or JSON out</li>
-            <li><span aria-hidden="true">✓</span> Topological order with cycle rejection</li>
+            <li><span aria-hidden="true">✓</span> Dependency order; cycles are rejected</li>
             <li><span aria-hidden="true">✓</span> Stable aliases for redacted exports</li>
             <li><span aria-hidden="true">✓</span> Known-minute total and missing estimates</li>
           </ul>
@@ -159,8 +168,8 @@
 
       <section class="failure-section" aria-labelledby="failure-title">
         <div class="section-heading compact">
-          <p class="eyebrow">Honest failure modes</p>
-          <h2 id="failure-title">Uncertainty stays on the page.</h2>
+          <p class="eyebrow">Failure modes</p>
+          <h2 id="failure-title">How the CLI reports uncertain lineage.</h2>
         </div>
         <div class="failure-grid">
           <article><span class="failure-mark amber" aria-hidden="true">?</span><h3>Partial manifest</h3><p>The order is marked “review required.” Missing lineage never becomes a green check.</p></article>
@@ -172,12 +181,12 @@
       <section class="install-section" id="install" aria-labelledby="install-title">
         <div>
           <p class="eyebrow">MIT licensed / v0.1.0</p>
-          <h2 id="install-title">Add one read-only step before the expensive one.</h2>
-          <p>Build from source today. The release package includes the binary built on this system.</p>
+          <h2 id="install-title">Install the CLI from source.</h2>
+          <p>Build from source today. The release package includes the binary built on its packaging host.</p>
         </div>
         <div class="install-command">
-          <code id="install-code" tabindex="0">cargo install --git https://github.com/B-Divyesh/sf-data-change-impact-card</code>
-          <button type="button" id="copy-install" aria-label="Copy install command">Copy</button>
+          <code id="install-code" tabindex="0">cargo install --path . --locked</code>
+          <button type="button" id="copy-install">Copy install command</button>
         </div>
         <p class="install-feedback" id="install-feedback" aria-live="polite"></p>
       </section>

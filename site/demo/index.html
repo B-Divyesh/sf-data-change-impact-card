@@ -9,6 +9,7 @@
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Demo — Data Change Impact Card" />
     <meta property="og:description" content="Run the bundled Data Change Impact Card sample." />
+    <meta property="og:url" content="https://data-change-impact-card.sociobot.in/demo/" />
     <meta property="og:image" content="https://data-change-impact-card.sociobot.in/assets/lineage-impact-card-social.webp" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Demo — Data Change Impact Card" />
@@ -18,29 +19,52 @@
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.svg" sizes="180x180" />
     <link rel="stylesheet" href="/style.css" />
+    <script type="module" src="/main.ts"></script>
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to main content</a>
     <header class="site-header">
-      <a class="wordmark" href="/" aria-label="Data Change Impact Card home"><span aria-hidden="true" class="mark">D<span>↘</span>C</span><span>Impact card <small>spec / 01</small></span></a>
+      <a class="wordmark" href="/" aria-label="Data Change Impact Card home"><span aria-hidden="true" class="mark">D<span>↘</span>C</span><span>Impact card <small>v0.1.0</small></span></a>
       <nav aria-label="Primary navigation"><a href="/demo/" aria-current="page">Demo</a><a href="/#contract">Manifest</a><a href="/#install">Install</a><a class="repo-link" href="/privacy/">Privacy</a></nav>
     </header>
     <aside class="demo-banner" aria-label="Demo mode">
       <strong>Demo — sample data, nothing is saved.</strong>
-      <span>This page shows the bundled CLI sample.</span>
-      <a href="/demo/?demo=1#sample">Reset demo</a>
+      <a href="/demo/?demo=1#demo-result">Reset demo</a>
       <a href="/">Start for real</a>
     </aside>
     <main id="main" class="demo-main">
       <section class="demo-intro" aria-labelledby="demo-title">
         <p class="eyebrow">Bundled CLI sandbox</p>
-        <h1 id="demo-title">Run sample lineage data.</h1>
-        <p>Use one command to create a temporary folder with sample input and a generated impact card.</p>
-        <div class="demo-command" id="sample"><code>dcic demo</code><span>or <code>dcic --demo</code></span></div>
-        <p class="demo-note">The command never reads your project. It does not connect to production or run a job.</p>
+        <h1 id="demo-title">Inspect a finished impact card.</h1>
+        <p>The bundled run traces one realistic change through complete sample lineage.</p>
+        <div class="demo-preview" id="demo-result">
+          <figure class="recorded-run">
+            <figcaption>Recorded <code>dcic demo</code> run</figcaption>
+            <pre tabindex="0"><code><span>$ dcic demo</span>
+Input: raw.orders v41 → v42
+Result: 2 stale assets
+        7 known minutes
+        0 unknown edges</code></pre>
+          </figure>
+          <article class="demo-impact-card" aria-label="Generated sample impact card">
+            <header><span>Generated impact card</span><strong>Ready</strong></header>
+            <h2>orders.v42</h2>
+            <dl>
+              <div><dt>Stale</dt><dd>2 assets</dd></div>
+              <div><dt>Estimate</dt><dd>7 min</dd></div>
+              <div><dt>Unknown</dt><dd>0 edges</dd></div>
+            </dl>
+            <ol aria-label="Recompute order">
+              <li><span>01</span> clean.orders</li>
+              <li><span>02</span> mart.revenue</li>
+            </ol>
+          </article>
+        </div>
       </section>
       <section class="demo-steps" aria-labelledby="steps-title">
-        <h2 id="steps-title">What the sample does</h2>
+        <h2 id="steps-title">Run the sample yourself</h2>
+        <div class="demo-command" id="sample"><code>dcic demo</code><span>or <code>dcic --demo</code></span></div>
+        <p class="demo-note">The command uses bundled files in a new temporary folder. It does not read your project or run a job.</p>
         <ol>
           <li><strong>Writes sample input</strong><span>Creates <code>lineage.yaml</code> and <code>changes.yaml</code> in a unique temporary folder.</span></li>
           <li><strong>Traces the change</strong><span>Finds two stale assets from one version change in complete declared lineage.</span></li>
@@ -56,6 +80,6 @@ Result: 2 stale assets, 7 known minutes, 0 unknown edges.</code></pre>
         <p>Open the printed file to inspect the Markdown card. Delete the temporary folder when you are done.</p>
       </section>
     </main>
-    <footer class="site-footer"><div class="footer-mark" aria-hidden="true">D<span>↘</span>C</div><p>Local impact cards for declared data lineage.<br /><span>Version 0.1.0 · Built by Param Factory</span></p><nav aria-label="Legal and project links"><a href="/demo/">Demo</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a><a href="https://github.com/B-Divyesh/sf-data-change-impact-card">GitHub <span aria-hidden="true">↗</span></a></nav></footer>
+    <footer class="site-footer"><div class="footer-mark" aria-hidden="true">D<span>↘</span>C</div><p>Local impact cards for declared data lineage.<br /><span>Version 0.1.0 · Built by Param Factory</span></p><nav aria-label="Legal and project links"><a href="/demo/?demo=1">Demo</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a><a href="https://github.com/B-Divyesh/sf-data-change-impact-card">GitHub <span aria-hidden="true">↗</span></a></nav></footer>
   </body>
 </html>
