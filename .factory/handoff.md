@@ -1,117 +1,65 @@
-# Handoff — Data Change Impact Card v0.1.0 repair
+# Handoff — independent verification 2
 
 ## Release status
 
-Repaired after independent verification of candidate
-`cd5f800f3eecf47711cdc7e8150386ac54cf72ce`. All reported release-blocking and
-high-severity defects have regression coverage. This is still a static
-documentation site plus a Rust CLI; no deployment class or product scope was
-changed.
+**FAIL — do not release.** Candidate
+`806414bbe0642e720c9f914cbd23acfdc828921e` was tested against
+<https://data-change-impact-card.sociobot.in> on 2026-08-29 UTC. The live site
+is byte-identical to the candidate build, so the findings apply to both.
 
-## What changed
+The cold first-read and one-click demo gates pass, and all three commands in
+`.factory/claims.json` pass after `npm ci`. Release remains blocked because the
+CLI labels an undeclared changed node as `no_impact` while also reporting an
+unknown edge that requires review, and because numerous landing-page/README
+claims are missing from the mandatory claims registry.
 
-- Added a real one-command sandbox: `dcic demo` and `dcic --demo` write bundled
-  `examples/` input and `impact.md` to a unique temporary `dcic-demo-*`
-  directory, then print the exact output path. `.factory/demo.md` documents
-  the browser and CLI entry points.
-- Added a first-screen **Try it with sample data** action and `/demo/`. The
-  page carries the required persistent demo banner, **Reset demo**, and
-  **Start for real** controls. The cold screen now names data engineers and
-  the outcome in plain words.
-- Added `.factory/claims.json` with tagged, observable regressions for the
-  bundled demo, offline shell, and no third-party browser requests.
-- Added a restrictive static-host CSP, a designed `404.html` response override,
-  canonical/Open Graph/Twitter metadata, 1200×630 local social image, apple
-  touch icon, complete sitemap, and shared header/footer skeleton.
-- Fixed `clippy::needless_lifetimes` in `topological_order`.
-- Added the required copy audit and terminology table. The social preview is a
-  documented deterministic crop of the existing original hero art.
+Full evidence and reproduction steps are in `.factory/verification-2.md`.
 
-## Run and verify
+## Verification performed
 
 ```sh
 npm ci
+npm audit --audit-level=high
+cargo fmt --check
+cargo clippy --all-targets -- -D warnings
 cargo test
 npm test
 npm run build
-cargo fmt --check
-cargo clippy --all-targets -- -D warnings
+PLAYWRIGHT_BASE_URL=https://data-change-impact-card.sociobot.in npx playwright test
 ```
 
-Run the demo after installing or building the binary:
+Each exact `.factory/claims.json` test command was also run independently. A
+fresh crate was extracted and installed into an isolated `--root`; the installed
+binary passed its demo and the 30-node/five-change acceptance fixture. Live QA
+covered desktop, 390px mobile, keyboard-only operation, focus, reduced motion,
+Axe, offline reload, service-worker update, request/storage privacy, headers,
+caching, 404 behavior, links, metadata, deployment hashes, and Lighthouse.
 
-```sh
-dcic demo
-# or
-dcic --demo
-```
+## Key results
 
-Run each public claim from `.factory/claims.json`:
+- Build/test/lint/package: pass.
+- Declared claim commands: pass.
+- First-read and one-click demo: pass.
+- Core unknown-change safety result: fail.
+- Claims inventory/coverage: fail.
+- Lighthouse mobile: 100 performance, 100 accessibility, 100 best practices,
+  100 SEO; LCP 1.1s, CLS 0.
+- Axe: zero violations across all public routes at desktop and mobile widths.
+- Privacy: only same-origin requests, no cookies/local storage/session storage/
+  IndexedDB, and documented offline Cache Storage only.
+- Deployment parity: all 10 sampled built/live files matched by SHA-256.
 
-```sh
-npm run build:site && npx playwright test --grep @claim:bundled-cli-demo
-npm run build:site && npx playwright test --grep @claim:offline-docs
-npm run build:site && npx playwright test --grep @claim:no-third-party-runtime-requests
-```
+## Additional defects
 
-Deploy `dist/site/` using the factory static deployment configuration. The
-release package is prepared with `npm run pack:cli`; do not publish it from
-this repository.
+- Offline navigation to `/demo/?demo=1` serves the cached home document.
+- Several nav/footer links are 34–42px wide and demo-banner links are 36px tall,
+  below the required 44×44px target.
+- The boxed `D↘C` wordmark wraps its `C` below the border at both widths.
+- The page claims Linux/macOS/Windows binaries, but the build produces only the
+  current Linux x64 binary.
+- The copy audit covers only seven rows, and the crate includes unrelated
+  `node_modules` README/LICENSE files.
 
-## Verification evidence — 2026-08-29 UTC
+## Product changes
 
-- Clean install: `cargo clean && npm ci` completed; `npm audit --audit-level=high`
-  reported 0 vulnerabilities.
-- Rust: `cargo test` passed 11 tests (5 unit, 6 integration); the 30-node,
-  five-change fixture still finds 20 `chain.*` stale assets and no unrelated
-  assets. `cargo fmt --check` and `cargo clippy --all-targets -- -D warnings`
-  passed.
-- Site: `npm test` passed 12 Playwright checks across desktop Chromium and
-  390×844 mobile (2 intentionally project-specific checks skipped) plus two
-  static delivery contract tests. Axe Playwright integration found no
-  serious/critical violations. Keyboard tabs, visible focus, reduced motion,
-  mobile overflow, and offline reload are covered.
-- Claims: `@claim:bundled-cli-demo` passed in desktop and mobile and verified
-  the generated Markdown card; `@claim:offline-docs` passed on desktop;
-  `@claim:no-third-party-runtime-requests` passed in both profiles.
-- Package/consumer: `cargo package` produced a 70.3KB `.crate`; a clean
-  extraction and `cargo install --path … --root … --locked` installed `dcic`.
-  Its installed `dcic demo` emitted the expected two-stale-asset, seven-minute
-  card and the package contained `examples/` and `.factory/demo.md`.
-- Production build: `npm run build` passed and emitted `dist/site/` and
-  `dist/package/`. Initial JS is 3.35KB (1.51KB gzip), CSS is 17.46KB (4.34KB
-  gzip), hero is 29.29KB, and social preview is 24.09KB.
-- Local browser smoke: `/opt/fleet/lib/verify-url.sh` against the production
-  preview returned 200 in 624ms with title, `lang=en`, one `h1`, `main`, no
-  missing image alt, no unlabeled button, and no console/page error. The
-  standalone Axe CLI could not launch its own Chrome in this container; the
-  repository's Playwright Axe integration passed instead.
-- Lighthouse 12.8.2 mobile against the production preview: Performance 100,
-  Accessibility 100, Best Practices 100, SEO 100; LCP 906.6ms, FCP 906.6ms,
-  CLS 0.
-
-## Deployment evidence
-
-Deployed with `/opt/fleet/lib/deploy-static.sh data-change-impact-card dist/site`
-to <https://data-change-impact-card.sociobot.in> on 2026-08-29 UTC. The final
-static-route repair is commit `9398dc3a77a2cc8c1b0cb987197380d84be29967`.
-
-- Live `/opt/fleet/lib/verify-url.sh` returned 200 in 654ms, with the expected
-  title, language, one `h1`, `main`, no missing alt text/unlabeled button, and
-  no console or page error.
-- Live headers include the restrictive CSP, `nosniff`, Referrer-Policy, and
-  Permissions-Policy. `/does-not-exist` returns HTTP 404 and the designed
-  `Page not found` document.
-- Live desktop and 390px Playwright run passed 12 checks (2 intentional skips),
-  including keyboard, Axe, offline reload, claim flows, privacy request log,
-  demo banner, and legal pages.
-- SHA-256 identity checks matched local `dist/site/` for `index.html`, hashed
-  CSS and JS, the hero WebP, and the social-preview WebP.
-
-## Known gaps and next steps
-
-The intentional product limits remain: no lineage inference, production
-connector, or job runner. The CLI sample leaves its temporary folder in place
-so a user can inspect the input and card; the command prints the folder for
-explicit deletion. Cross-platform release binaries and checksums remain a
-factory release-CI responsibility.
+None. Only independent verification documentation and evidence were added.
