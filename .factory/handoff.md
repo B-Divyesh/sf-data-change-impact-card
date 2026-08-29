@@ -1,4 +1,53 @@
-# Handoff — Data Change Impact Card
+# Review 1 handoff — Data Change Impact Card
+
+## Review result
+
+**FAIL.** Adversarial first-read review 1 is recorded in
+`.factory/review-1.md`. Product code was not modified. The cold landing page is
+clear, the CLI works end to end, every registered claim command passes, and the
+live site passes its build, accessibility, privacy, offline, link, and basic
+metadata checks. The release still fails this review because the one-click demo
+does not show realistic output in its first viewport and the public claim
+registry/tests do not cover every stated CLI behavior.
+
+## Work performed
+
+- Captured fresh 390×844 and 1440×900 cold and demo first screens.
+- Audited every landing/README sentence and all landing headings/actions.
+- Ran all nine `.factory/claims.json` commands verbatim from a fresh clone.
+- Ran both CLI demo forms from an empty temporary directory and inspected their
+  three generated files.
+- Verified live offline behavior, same-origin requests, empty cookie and web
+  key/value storage, Reset, Start for real, deep links, Back, focus, all links,
+  route metadata, headers, 404, target sizes, and product identity.
+- Rechecked every repair recorded in the earlier handoff.
+
+## Verification
+
+```sh
+npm ci
+npm test
+npm run build
+```
+
+Results: `npm test` passed 27 browser tests with 3 intentional skips plus all 13
+Rust and 2 contract tests. `npm run build` produced `dist/site/` and the CLI
+package. All nine exact claim commands passed in the fresh clone. The required
+live URL verifier passed, and live Axe scans found no serious/critical issue on
+home, demo, privacy, terms, or 404 at either viewport.
+
+## Required next steps
+
+1. Make `/demo/?demo=1` show the recorded real run and generated impact card in
+   the first 390×844 viewport.
+2. Register or remove every unlisted/under-tested public behavior detailed in
+   F-1-2.
+3. Resolve the history regressions in F-1-3 and F-1-4.
+4. Address the remaining routing, metadata, skeleton, and copy findings.
+
+---
+
+# Previous release handoff — Data Change Impact Card
 
 ## Release status
 
