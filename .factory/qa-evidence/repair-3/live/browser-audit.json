@@ -1,0 +1,153 @@
+{
+  "routes": [
+    {
+      "viewport": "desktop",
+      "path": "/",
+      "status": 200,
+      "title": "Data Change Impact Card — Trace data changes",
+      "lang": "en",
+      "h1": 1,
+      "main": true,
+      "overflow": 0,
+      "seriousCriticalAxe": 0,
+      "consoleErrors": []
+    },
+    {
+      "viewport": "desktop",
+      "path": "/demo/?demo=1",
+      "status": 200,
+      "title": "Demo — Data Change Impact Card",
+      "lang": "en",
+      "h1": 1,
+      "main": true,
+      "overflow": 0,
+      "seriousCriticalAxe": 0,
+      "consoleErrors": []
+    },
+    {
+      "viewport": "desktop",
+      "path": "/privacy/",
+      "status": 200,
+      "title": "Privacy — Data Change Impact Card",
+      "lang": "en",
+      "h1": 1,
+      "main": true,
+      "overflow": 0,
+      "seriousCriticalAxe": 0,
+      "consoleErrors": []
+    },
+    {
+      "viewport": "desktop",
+      "path": "/terms/",
+      "status": 200,
+      "title": "Terms — Data Change Impact Card",
+      "lang": "en",
+      "h1": 1,
+      "main": true,
+      "overflow": 0,
+      "seriousCriticalAxe": 0,
+      "consoleErrors": []
+    },
+    {
+      "viewport": "desktop",
+      "path": "/404.html",
+      "status": 200,
+      "title": "Page not found — Data Change Impact Card",
+      "lang": "en",
+      "h1": 1,
+      "main": true,
+      "overflow": 0,
+      "seriousCriticalAxe": 0,
+      "consoleErrors": []
+    },
+    {
+      "viewport": "mobile390",
+      "path": "/",
+      "status": 200,
+      "title": "Data Change Impact Card — Trace data changes",
+      "lang": "en",
+      "h1": 1,
+      "main": true,
+      "overflow": 0,
+      "seriousCriticalAxe": 0,
+      "consoleErrors": []
+    },
+    {
+      "viewport": "mobile390",
+      "path": "/demo/?demo=1",
+      "status": 200,
+      "title": "Demo — Data Change Impact Card",
+      "lang": "en",
+      "h1": 1,
+      "main": true,
+      "overflow": 0,
+      "seriousCriticalAxe": 0,
+      "consoleErrors": []
+    },
+    {
+      "viewport": "mobile390",
+      "path": "/privacy/",
+      "status": 200,
+      "title": "Privacy — Data Change Impact Card",
+      "lang": "en",
+      "h1": 1,
+      "main": true,
+      "overflow": 0,
+      "seriousCriticalAxe": 0,
+      "consoleErrors": []
+    },
+    {
+      "viewport": "mobile390",
+      "path": "/terms/",
+      "status": 200,
+      "title": "Terms — Data Change Impact Card",
+      "lang": "en",
+      "h1": 1,
+      "main": true,
+      "overflow": 0,
+      "seriousCriticalAxe": 0,
+      "consoleErrors": []
+    },
+    {
+      "viewport": "mobile390",
+      "path": "/404.html",
+      "status": 200,
+      "title": "Page not found — Data Change Impact Card",
+      "lang": "en",
+      "h1": 1,
+      "main": true,
+      "overflow": 0,
+      "seriousCriticalAxe": 0,
+      "consoleErrors": []
+    }
+  ],
+  "keyboard": {
+    "firstFocus": "Skip to main content",
+    "skipTarget": "hero-title",
+    "selectedTab": "Manifest"
+  },
+  "reducedMotion": {
+    "matches": true,
+    "scrollBehavior": "auto",
+    "animationDuration": "1e-06s",
+    "transitionDuration": "1e-06s"
+  },
+  "privacy": {
+    "requests": 16,
+    "onlySameOrigin": true,
+    "cookies": "",
+    "localStorage": 0,
+    "sessionStorage": 0,
+    "indexedDB": 0
+  },
+  "offlineUpdate": {
+    "supported": true,
+    "state": "activated",
+    "caches": [
+      "dcic-shell-v3"
+    ],
+    "offlineStatus": 200,
+    "offlineTitle": "Demo — Data Change Impact Card",
+    "banner": "Demo — sample data, nothing is saved. Reset demo Start for real"
+  }
+}

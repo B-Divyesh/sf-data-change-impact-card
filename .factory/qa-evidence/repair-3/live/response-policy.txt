@@ -1,0 +1,55 @@
+/ 200 11770 text/html
+/demo/?demo=1 200 5486 text/html
+/privacy/ 200 3646 text/html
+/terms/ 200 3448 text/html
+/does-not-exist 404 2814 text/html
+/sw.js 200 1542 text/javascript
+/assets/style-Ce9p5bvv.css 200 20383 text/css
+HTTP/2 200 
+content-type: text/html
+date: Sat, 29 Aug 2026 21:54:53 GMT
+accept-ranges: bytes
+cache-control: public, must-revalidate, max-age=30
+etag: "05911982"
+last-modified: Sat, 29 Aug 2026 21:53:23 GMT
+content-length: 11770
+strict-transport-security: max-age=10886400; includeSubDomains; preload
+referrer-policy: strict-origin-when-cross-origin
+x-content-type-options: nosniff
+x-xss-protection: 1; mode=block
+x-dns-prefetch-control: off
+permissions-policy: camera=(), microphone=(), geolocation=()
+content-security-policy: default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; font-src 'self'; connect-src 'self'; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'
+
+HTTP/2 200 
+content-type: text/javascript
+date: Sat, 29 Aug 2026 21:54:54 GMT
+accept-ranges: bytes
+cache-control: no-cache
+etag: "05911982"
+last-modified: Sat, 29 Aug 2026 21:53:23 GMT
+content-length: 1542
+strict-transport-security: max-age=10886400; includeSubDomains; preload
+referrer-policy: strict-origin-when-cross-origin
+x-content-type-options: nosniff
+x-xss-protection: 1; mode=block
+x-dns-prefetch-control: off
+permissions-policy: camera=(), microphone=(), geolocation=()
+content-security-policy: default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; font-src 'self'; connect-src 'self'; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'
+
+HTTP/2 200 
+content-type: text/css
+date: Sat, 29 Aug 2026 21:54:53 GMT
+accept-ranges: bytes
+cache-control: public, max-age=31536000, immutable
+etag: "05911982"
+last-modified: Sat, 29 Aug 2026 21:53:23 GMT
+content-length: 20383
+strict-transport-security: max-age=10886400; includeSubDomains; preload
+referrer-policy: strict-origin-when-cross-origin
+x-content-type-options: nosniff
+x-xss-protection: 1; mode=block
+x-dns-prefetch-control: off
+permissions-policy: camera=(), microphone=(), geolocation=()
+content-security-policy: default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; font-src 'self'; connect-src 'self'; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'
+
